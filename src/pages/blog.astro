@@ -1,0 +1,570 @@
+---
+import Layout from "../layouts/Layout.astro";
+import blog1 from "../assets/blog1.png";
+import blog2 from "../assets/blog2.png";
+import blog3 from "../assets/blog3.png";
+import blog4 from "../assets/blog4.png";
+import blog5 from "../assets/blog5.png";
+// Modified blog posts to include HTML content with hyperlinks and SEO metadata
+const blogPosts = [
+{
+    title: "The AI Marketing Revolution: Transforming the Future of Customer Engagement",
+    excerpt:
+      "Artificial Intelligence <a href='https://en.wikipedia.org/wiki/Artificial_intelligence' class='text-[#D80032] hover:underline'>(AI)</a> is no longer a distant dream, it's a driving force behind a major shift in the marketing industry.",
+    date: "March 15, 2025",
+    author: "Admin",
+    category: "Industry Trends",
+    image: blog1,
+    content: "Artificial Intelligence <a href='https://en.wikipedia.org/wiki/Artificial_intelligence' class='text-[#D80032] hover:underline'>(AI)</a> is no longer a distant dream, it's a driving force behind a major shift in the marketing industry. From automation to hyper-personalization, AI reshapes how brands connect with consumers, creating more efficient, impactful, and data-driven strategies. <br><br> At the heart of this transformation is AI's ability to process and analyze vast volumes of data in real time. Marketers can now uncover patterns, predict consumer behavior, and make informed decisions faster. These insights power up brands to deliver quality messages to the right people at the right time, maximizing engagement and return on investment. <br><br> AI-powered tools are also revolutionizing customer interactions. Chatbots, predictive analytics, and recommendation engines provide instant support and personalized experiences, helping businesses build stronger relationships with their customers. Whether it’s suggesting the perfect product or automating email campaigns based on user behavior, AI enhances every step of the customer journey. <br><br> Moreover, automation allows marketers to shift focus from routine tasks to creative and strategic work. <a href='https://www.oracle.com/cx/marketing/campaign-management/what-is-campaign-management/' class='text-[#D80032] hover:underline'>Campaign management </a>, content curation, A/B testing, and social media scheduling can all be streamlined with AI, increasing productivity and improving consistency. <br><br>However, the rise of AI in marketing doesn’t come without concerns. Ethical questions around data privacy, bias in algorithms, and transparency are gaining attention. Businesses must adopt responsible AI practices, ensuring that customer data is used respectfully and ethically. <br><br>As AI continues to evolve, its role in marketing will only grow stronger. Companies that embrace this shift early are likely to outperform competitors by delivering smarter, faster, and more personalized experiences.The AI marketing revolution isn’t just another trend, it's a permanent evolution in how brands operate, strategize, and communicate. It’s time to adapt, innovate, and lead the change.",
+    // Added SEO metadata
+    metaTitle: "The AI Marketing Revolution for the Future of Digital Strategy",
+    metaDescription: "Discover how artificial intelligence is revolutionizing marketing. Learn how AI enhances customer engagement, automates tasks, and powers data-driven decisions while addressing ethical concerns.",
+    metaKeywords: "AI marketing, artificial intelligence in marketing, AI-powered marketing tools, personalized marketing, AI customer engagement, marketing automation, data-driven marketing, AI trends 2025, ethical AI in marketing"
+  },
+  {
+    title: "Powerful Ways AI Can Supercharge Your Marketing Campaigns",
+    excerpt:
+      "In an era of digital noise and ever-evolving consumer expectations, marketers are under constant pressure to deliver results that are fast, smart, and personalized.",
+    date: "March 10, 2025",
+    author: "Admin",
+    category: "Product Updates",
+    image: blog2,
+    content: "In an era of digital noise and ever-evolving consumer expectations, marketers are under constant pressure to deliver results that are fast, smart, and personalized. That’s where Artificial Intelligence (AI) steps in offering tools and insights that redefine how <a href='https://www.bigcommerce.com/glossary/marketing-campaigns/' class='text-[#D80032] hover:underline'>marketing campaigns </a> are created, executed, and optimized.<br> <br><b>Here are five impactful ways AI can supercharge your marketing strategy:</b> <br>1. Smarter Data Analysis <br> AI can process and analyze massive amounts of customer data in real-time, helping businesses uncover deep insights into consumer behavior, preferences, and trends. These insights allow marketers to create highly targeted campaigns that speak directly to their audience’s needs and interests.<br><br> 2. Personalized Content Creation <br> Creating customized content at scale used to be a time-consuming challenge. Now, AI tools can generate personalized messages from emails to product recommendations based on customer behavior, demographics, and buying patterns. This level of personalization enhances user experience and boosts engagement.<br><br> 3. AI-Powered Chatbots <br> AI-driven chatbots are transforming customer service by offering instant, 24/7 support. These bots can answer queries, guide users through the buyer journey, and even complete transactions, all while maintaining a consistent brand voice. This improves response time and customer satisfaction significantly. <br><br> 4. Predictive Analytics for Proactive Campaigns <br> Why wait for trends to emerge when you can predict them? AI-powered <a href='https://www.ibm.com/think/topics/predictive-analytics' class='text-[#D80032] hover:underline'> predictive analytics </a> helps businesses forecast customer behavior, seasonal trends, and market shifts. This enables marketers to craft proactive strategies and stay ahead of the competition.<br><br> 5. Optimized Ad Targeting <br> AI takes the guesswork out of ad placements. Through real-time analysis and pattern recognition, AI ensures that your ads are shown to the right people, at the right time, on the right platforms. This not only improves ROI but also reduces wasted ad spend.<br><br>Conclusion Artificial Intelligence is no longer a futuristic concept, it's a practical, powerful ally in today’s marketing world. By integrating AI into your campaigns, you can enhance efficiency, improve targeting, and deliver experiences that truly connect with your audience.",
+    // Added SEO metadata
+    metaTitle: "5 Ways AI Can Boost Your Marketing Campaigns and Results",
+    metaDescription: "Discover five powerful ways AI can elevate your marketing campaigns from smarter data analysis to personalized content, predictive analytics, and optimized ad targeting.",
+    metaKeywords: "AI marketing strategies, artificial intelligence in marketing, personalized content AI, AI chatbots, predictive marketing, data-driven marketing, AI ad targeting, marketing automation tools, AI in digital campaigns"
+  },
+  {
+    title: "Predictive Marketing: How AI Helps You Reach the Right Customers",
+    excerpt:
+      "In a competitive digital marketplace, reaching the right customer at the right time is key to success. Predictive marketing, powered by artificial intelligence (AI)",
+    date: "March 1, 2025",
+    author: "Admin",
+    category: "Case Studies",
+    image: blog3,
+    content: "In a competitive digital marketplace, reaching the right customer at the right time is key to success. Predictive marketing, powered by artificial intelligence (AI), is giving businesses a powerful edge by turning data into foresight. It's no longer about reacting to <a hrefhttps://blog.hubspot.com/service/customer-behavior-analysis class='text-[#D80032] hover:underline'> customer behavior </a>, it's about anticipating it.<br><br> At the heart of predictive marketing lies AI-driven analytics. By examining historical data such as purchase history, browsing behavior, and engagement patterns AI can identify meaningful trends and predict future actions. This enables marketers to create campaigns that speak directly to a customer's needs, long before they even express them.<br><br> <b> Smarter Segmentation </b><br> One of the most valuable applications of predictive marketing is advanced audience segmentation. AI can group customers into highly specific segments based on behaviors, preferences, and potential value. Instead of one-size-fits-all messaging, businesses can send personalized content that resonates deeply with each group, leading to higher conversion rates. <br><br> <b> Better Lead Prioritization </b><br> Predictive models help marketers pinpoint high-intent leads, allowing sales and marketing teams to focus their energy on the prospects most likely to convert. This not only improves efficiency but ensures that your budget and resources are being spent on the opportunities with the highest return potential.<br><br> <b> Improved Customer Retention </b><br> AI doesn't just help with acquisition, it enhances retention, too. By identifying signs of churn or disengagement early, businesses can proactively address customer concerns and deliver relevant offers or support, increasing loyalty and lifetime value.<br><br> <b> Real-World Success </b><br>Brands across industries are leveraging predictive marketing to drive impact. From eCommerce platforms recommending products to SaaS companies predicting user behavior for upsells, the applications are limitless. These real-time insights make <a href='https://en.wikipedia.org/wiki/Advertising_campaign' class='text-[#D80032] hover:underline'> marketing campaigns </a> smarter, faster, and more effective.<br><br> <b> Conclusion </b><br> Predictive marketing is more than a buzzword; it's a smarter, AI-powered way to understand and engage customers. With the ability to forecast needs, personalize communication, and prioritize resources, businesses can connect with the right audience at precisely the right moment. The future of marketing is predictive and it’s already here.",
+    // Added SEO metadata
+    metaTitle: "Predictive Marketing with AI: Reach the Right Customers at the Right Time",
+    metaDescription: "Learn how AI-powered predictive marketing helps businesses anticipate customer behavior, improve segmentation, prioritize leads, and increase conversions with smarter strategies.",
+    metaKeywords: "predictive marketing, AI in marketing, predictive analytics, customer segmentation, AI marketing tools, lead scoring AI, customer behavior prediction, AI-powered marketing, marketing automation, data-driven marketing"
+  },
+  {
+    title: "The Future of Content Creation: How AI is Automating the Creative Process",
+    excerpt:
+      "Content is the backbone of digital marketing, but producing high-quality content consistently can be time-consuming and costly.",
+    date: "February 15, 2025",
+    author: "Admin",
+    category: "Industry Trends",
+    image: blog4,
+    content: "Content is the backbone of digital marketing, but producing high-quality content consistently can be time-consuming and costly. Fortunately, Artificial Intelligence (AI) is revolutionizing content creation by automating key tasks, enhancing creativity, and improving efficiency across the board.<br><br>AI-powered tools are changing the game by generating content at scale ranging from blog articles and website copy to social media captions and product descriptions. These tools support natural language processing <a href='https://en.wikipedia.org/wiki/Natural_language_processing' class='text-[#D80032] hover:underline'> (NLP) </a> and machine learning to create content that’s not only readable but also optimized for search engines. This means marketers can produce engaging, SEO-friendly content faster than ever before.<br><br><b> Streamlining Content Production</b><br>With AI, marketers can now automate the entire content workflow from brainstorming and outlining to drafting and editing. AI tools analyze existing content, identify gaps, and even suggest headlines or topics based on trending data and audience behavior. This allows teams to stay relevant and maintain a steady publishing schedule without burning out.<br><br><b>Smarter Content Curation</b><br>Beyond creation, AI also excels at content curation. By analyzing user behavior and interests, AI can recommend articles, videos, or topics that align with what your audience wants. This ensures that your content stays fresh, timely, and highly engaging without the need for constant manual research.<br><br><b>Enhancing SEO and Reach </b><br>Modern <a href='https://sproutsocial.com/insights/ai-marketing-tools/' class='text-[#D80032] hover:underline'> AI tools </a> go a step further by optimizing content for search engine visibility. From keyword suggestions and readability improvements to meta description generation, AI ensures that your content performs well and reaches the right audience at the right time.<br><br><b>Balancing Creativity with Automation</b><br>While AI can automate many aspects of content creation, the human touch remains essential. Creativity, emotion, and storytelling are areas where human marketers shine. The future of content lies in a collaborative relationship where AI handles the technical and repetitive tasks, allowing human creators to focus on strategy and innovation. <br><br><b>Conclusion</b><br>AI isn’t replacing content creators, it's supporting them. By automating routine tasks and enhancing decision-making, AI is shaping a future where marketers can produce more impactful content with less effort. As technology evolves, embracing AI as a creative partner will be key to staying competitive in the digital age.",
+    // Added SEO metadata
+    metaTitle: "How AI Is Shaping the Future of Content Creation",
+    metaDescription: "Discover how AI is transforming content creation by automating writing, curation, SEO optimization, and more helping marketers create better content faster and smarter.",
+    metaKeywords: "AI content creation, automated content writing, content creation tools, AI in marketing, future of content, AI copywriting, content curation AI, SEO automation, AI content strategy, digital marketing automation"
+  },
+  {
+    title: "Data-Driven Marketing: How AI Helps You Make Smarter Decisions",
+    excerpt:
+      "In today’s digital-first world, marketing without data is like navigating without a map. Data-driven marketing has become essential for businesses aiming to make informed,",
+    date: "February 10, 2025",
+    author: "Admin",
+    category: "Tutorials",
+    image: blog5,
+    content: "In today’s digital-first world, marketing without data is like navigating without a map. Data-driven marketing has become essential for businesses aiming to make informed, effective decisions and Artificial Intelligence (AI) is the engine powering this transformation.<br><br></br>AI allows marketers to go beyond surface-level data. By analyzing massive datasets in real time, AI uncovers hidden patterns, customer behaviors, and emerging trends. This means marketing teams can move from guesswork to precision, crafting campaigns that speak directly to their audience’s needs and interests.<br><br><b>Deeper Customer Insights</b><br>One of AI’s greatest strengths lies in its ability to process complex data sets quickly. It can segment audiences based on purchase behavior, browsing habits, demographics, and even <a href='https://en.wikipedia.org/wiki/Sentiment_analysis' class='text-[#D80032] hover:underline'> sentiment analysis.</a> These insights support marketers to create hyper-personalized campaigns that drive higher engagement and conversion rates.<br><br><b>Real-Time Optimization</b><br>In a fast-paced environment where consumer preferences shift rapidly, timing is everything. AI-powered analytics tools give marketers real-time feedback, enabling them to tweak content, targeting, and budget allocation on the fly. This agility ensures campaigns remain relevant and effective, maximizing ROI.<br><br><b>Predictive Intelligence</b><br>AI doesn’t just look back, it looks ahead. Predictive analytics use historical data to forecast future customer behavior, helping marketers anticipate needs and respond proactively. This allows businesses to stay ahead of the curve, from launching the right product at the right time to delivering timely, relevant messaging.<br><br><b>Ethical Data Use and Trust</b><br>With great data comes great responsibility. As businesses collect and analyze customer information, ethical data practices are more important than ever. Transparency, consent, and data security are critical to maintaining consumer trust. AI can assist here too, offering tools that ensure compliance and responsible data handling.<br><br><b>Conclusion</b><br>AI is revolutionizing data-driven marketing by turning raw information into strategy. It allows marketers to understand their audience deeply, respond with agility, and build long-term <a href='https://blog.hubspot.com/service/customer-relations' class='text-[#D80032] hover:underline'> customer relationships </a> through trust and personalization. In a world overflowing with data, AI is the key to making smarter, faster, and more ethical marketing decisions.",
+    // Added SEO metadata
+    metaTitle: "Data-Driven Marketing with AI: Smarter Decisions for Better Results",
+    metaDescription: "Learn how AI enhances data-driven marketing by uncovering insights, enabling real-time strategy optimization, and helping businesses make smarter, ethical decisions.",
+    metaKeywords: "AI in marketing, data-driven marketing, marketing analytics, predictive marketing, customer behavior analysis, AI-powered insights, real-time marketing data, marketing optimization, ethical data use, personalized marketing strategies"
+  },
+  // Add more blog posts here as needed
+];
+
+// Reduced to 4 topic categories
+const topics = [
+  "Tutorials",
+  "Industry Trends",
+  "Case Studies",
+  "Product Updates",
+];
+
+// Count posts by category
+const postCounts = topics.reduce((acc, topic) => {
+  acc[topic] = blogPosts.filter((post) => post.category === topic).length;
+  return acc;
+}, {});
+
+// Map of blog posts to images
+const blogImages = {
+  0: blog1,
+  1: blog2,
+  2: blog3,
+  3: blog4,
+  4: blog5
+};
+---
+
+<Layout title="Blog">
+  <!-- Main container with white background and margin-top -->
+  <div class="bg-white text-gray-800 min-h-screen pt-16">
+    <!-- Added pt-16 for margin top -->
+    <!-- Main content area -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Main content with sidebar layout -->
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Main blog posts grid area - 70% width -->
+        <div class="lg:w-3/4">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+            id="blog-grid"
+          >
+            {
+              blogPosts.map((post, index) => (
+                <article
+                  class={`bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 hover:translate-y-[-4px] border border-gray-200 ${index >= 4 ? "hidden" : ""}`}
+                  data-category={post.category}
+                  data-index={index}
+                  data-title={post.title}
+                  data-author={post.author}
+                  data-date={post.date}
+                  data-content={post.content}
+                  data-excerpt={post.excerpt}
+                  data-meta-title={post.metaTitle}
+                  data-meta-description={post.metaDescription}
+                  data-meta-keywords={post.metaKeywords}
+                  data-image-src={blogImages[index]?.src || "/api/placeholder/400/250"}
+                >
+                  <div class="aspect-w-16 aspect-h-9">
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+                      <img
+                        src={blogImages[index]?.src || "/api/placeholder/400/250"}
+                        alt={post.title}
+                        class="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <span>{post.date}</span>
+                      <span class="mx-2">•</span>
+                      <span class="category-tag">{post.category}</span>
+                    </div>
+                    <!-- Using div with innerHTML to properly render HTML content with links -->
+                    <div class="block mt-2 cursor-pointer blog-link">
+                      <h3 class="text-xl font-semibold text-gray-800 hover:text-[#D80032] transition blog-title">
+                        {post.title}
+                      </h3>
+                      <p class="mt-3 text-gray-600 blog-excerpt" set:html={post.excerpt} />
+                    </div>
+                    <div class="mt-4 flex items-center">
+                      <div class="flex-shrink-0">
+                        <div class="h-8 w-8 rounded-full bg-[#F78CA2] flex items-center justify-center text-white">
+                          <span class="text-xs">{post.author[0]}</span>
+                        </div>
+                      </div>
+                      <div class="ml-3">
+                        <p class="text-sm font-medium text-[#3D0C11]">
+                          {post.author}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- SEO metadata (hidden from view) -->
+                  <meta name="title" content={post.metaTitle} />
+                  <meta name="description" content={post.metaDescription} />
+                  <meta name="keywords" content={post.metaKeywords} />
+                </article>
+              ))
+            }
+          </div>
+
+          <!-- Load More Button -->
+          <div class="mt-12 flex justify-center">
+            <button
+              class="px-8 py-3 bg-[#D80032] hover:bg-[#3D0C11] text-white font-medium rounded-md transition"
+              id="load-more"
+            >
+              Load More
+            </button>
+          </div>
+        </div>
+
+        <!-- Right sidebar for filters - 30% width -->
+        <div class="lg:w-1/4">
+          <div
+            class="bg-gray-50 rounded-xl p-6 sticky top-24 border border-gray-200"
+          >
+            <!-- Adjusted top value -->
+            <h2
+              class="text-xl font-bold mb-6 border-b border-gray-200 pb-3 text-[#3D0C11]"
+            >
+              Topics
+            </h2>
+
+            <div class="flex flex-col gap-3">
+              <button
+                class="bg-gray-200 text-[#3D0C11] px-4 py-2 rounded-md hover:bg-gray-300 transition flex justify-between items-center active topic-filter"
+                data-category="all"
+                id="filter-all"
+              >
+                <span>All Topics</span>
+                <span class="text-xs bg-gray-100 px-2 py-1 rounded-full">
+                  {blogPosts.length}
+                </span>
+              </button>
+
+              {
+                topics.map((topic) => {
+                  let bgColor = "";
+
+                  if (topic === "Tutorials")
+                    bgColor = "bg-[#F78CA2] text-white";
+                  if (topic === "Industry Trends")
+                    bgColor = "bg-[#D80032] text-white";
+                  if (topic === "Case Studies")
+                    bgColor = "bg-[#3D0C11] text-white";
+                  if (topic === "Product Updates")
+                    bgColor = "bg-[#F78CA2] bg-opacity-50 text-[#3D0C11]";
+
+                  return (
+                    <button
+                      class={`${bgColor} px-4 py-2 rounded-md hover:opacity-90 transition flex justify-between items-center topic-filter`}
+                      data-category={topic}
+                    >
+                      <span>{topic}</span>
+                      <span class="text-xs bg-white bg-opacity-50 px-2 py-1 rounded-full text-[#3D0C11]">
+                        {postCounts[topic] || 0}
+                      </span>
+                    </button>
+                  );
+                })
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for displaying full blog content -->
+  <div id="blog-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto" style={{scrollbarWidth:"none"}}>
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 id="modal-title" class="text-2xl font-bold text-[#3D0C11]"></h2>
+          <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <!-- Added featured image container -->
+        <div class="w-full h-64 bg-gray-200 rounded-lg mb-6 overflow-hidden">
+          <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="flex items-center text-sm text-gray-500 mb-6">
+          <span id="modal-date"></span>
+          <span class="mx-2">•</span>
+          <span id="modal-category" class="category-tag"></span>
+          <span class="mx-2">•</span>
+          <span id="modal-author"></span>
+        </div>
+        <div class="prose max-w-none">
+          <div id="modal-content" class="text-gray-700"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get all filter buttons
+    const filterButtons = document.querySelectorAll(".topic-filter");
+    const allButton = document.getElementById("filter-all");
+
+    // Get all blog posts
+    const blogPosts = document.querySelectorAll("#blog-grid article");
+    
+    // Get all blog links
+    const blogLinks = document.querySelectorAll(".blog-link");
+
+    // Get the load more button
+    const loadMoreButton = document.getElementById("load-more");
+
+    // Track current visible count for load more functionality
+    let visibleCount = 4;
+    const totalPosts = blogPosts.length;
+
+    // Modal elements
+    const modal = document.getElementById("blog-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDate = document.getElementById("modal-date");
+    const modalCategory = document.getElementById("modal-category");
+    const modalAuthor = document.getElementById("modal-author");
+    const modalContent = document.getElementById("modal-content");
+    const modalImage = document.getElementById("modal-image");
+    const closeModal = document.getElementById("close-modal");
+    
+    // Prevent links in blog excerpts from triggering modal
+    document.querySelectorAll(".blog-excerpt a").forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.stopPropagation();
+      });
+    });
+    
+    // Make entire article clickable to open modal
+    blogPosts.forEach((post) => {
+      post.addEventListener("click", function(e) {
+        // Don't open modal if clicking on a link
+        if (e.target.tagName === 'A') {
+          e.stopPropagation();
+          return;
+        }
+        
+        // Exclude clicks on topic filter buttons
+        if (e.target.closest('.topic-filter')) {
+          return;
+        }
+        
+        // Get data attributes
+        const title = this.getAttribute("data-title");
+        const date = this.getAttribute("data-date");
+        const category = this.getAttribute("data-category");
+        const author = this.getAttribute("data-author");
+        const content = this.getAttribute("data-content");
+        const imageSrc = this.getAttribute("data-image-src");
+        
+        // Get SEO metadata for this post
+        const metaTitle = this.getAttribute("data-meta-title");
+        const metaDescription = this.getAttribute("data-meta-description");
+        const metaKeywords = this.getAttribute("data-meta-keywords");
+        
+        // Update page head with post-specific SEO metadata when modal opens
+        document.title = metaTitle;
+        
+        // Find or create meta tags
+        let descriptionMeta = document.querySelector('meta[name="description"]');
+        let keywordsMeta = document.querySelector('meta[name="keywords"]');
+        
+        if (!descriptionMeta) {
+          descriptionMeta = document.createElement('meta');
+          descriptionMeta.setAttribute('name', 'description');
+          document.head.appendChild(descriptionMeta);
+        }
+        
+        if (!keywordsMeta) {
+          keywordsMeta = document.createElement('meta');
+          keywordsMeta.setAttribute('name', 'keywords');
+          document.head.appendChild(keywordsMeta);
+        }
+        
+        // Update meta tags
+        descriptionMeta.setAttribute('content', metaDescription);
+        keywordsMeta.setAttribute('content', metaKeywords);
+        
+        // Populate modal with content
+        modalTitle.textContent = title;
+        modalDate.textContent = date;
+        modalCategory.textContent = category;
+        modalAuthor.textContent = author;
+        
+        // Set HTML content instead of text content to render links
+        modalContent.innerHTML = content;
+        
+        // Set the image source and alt text
+        modalImage.src = imageSrc;
+        modalImage.alt = title;
+        
+        // Show modal
+        modal.classList.remove("hidden");
+        
+        // Prevent body scrolling when modal is open
+        document.body.style.overflow = "hidden";
+      });
+    });
+
+    // Close modal when clicking the close button
+    closeModal.addEventListener("click", function() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = "auto";
+      
+      // Reset page title when modal closes
+      document.title = "Blog";
+    });
+
+    // Close modal when clicking outside the modal content
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+        
+        // Reset page title when modal closes
+        document.title = "Blog";
+      }
+    });
+
+    // Add click event listener to the load more button
+    loadMoreButton.addEventListener("click", function () {
+      // Get all posts that match the current filter
+      const currentFilter = document
+        .querySelector(".active")
+        .getAttribute("data-category");
+      let matchingPosts = Array.from(blogPosts);
+
+      if (currentFilter !== "all") {
+        matchingPosts = Array.from(blogPosts).filter(
+          (post) => post.getAttribute("data-category") === currentFilter
+        );
+      }
+
+      // Show all hidden posts that match the current filter
+      matchingPosts.forEach((post) => {
+        if (post.classList.contains("hidden")) {
+          post.classList.remove("hidden");
+        }
+      });
+
+      // Hide the load more button since all posts are now visible
+      loadMoreButton.style.display = "none";
+    });
+
+    // Add click event listeners to all filter buttons
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const category = this.getAttribute("data-category");
+
+        // Remove 'active' class from all buttons
+        filterButtons.forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Add 'active' class to the clicked button
+        this.classList.add("active");
+
+        // Reset the visible count
+        visibleCount = 4;
+
+        // Filter posts
+        let visiblePosts = 0;
+
+        // Show the load more button again
+        loadMoreButton.style.display = "block";
+
+        if (category === "all") {
+          // Show only the first 4 posts
+          blogPosts.forEach((post, index) => {
+            if (index < 4) {
+              post.classList.remove("hidden");
+              visiblePosts++;
+            } else {
+              post.classList.add("hidden");
+            }
+          });
+
+          // Hide load more if there are 4 or fewer total posts
+          if (totalPosts <= 4) {
+            loadMoreButton.style.display = "none";
+          }
+        } else {
+          // Count matching posts for the selected category
+          const matchingPosts = Array.from(blogPosts).filter(
+            (post) => post.getAttribute("data-category") === category
+          );
+
+          // Show only the first 4 matching posts
+          blogPosts.forEach((post) => {
+            if (post.getAttribute("data-category") === category) {
+              if (visiblePosts < 4) {
+                post.classList.remove("hidden");
+                visiblePosts++;
+              } else {
+                post.classList.add("hidden");
+              }
+            } else {
+              post.classList.add("hidden");
+            }
+          });
+
+          // Hide load more if there are 4 or fewer matching posts
+          if (matchingPosts.length <= 4) {
+            loadMoreButton.style.display = "none";
+          }
+        }
+      });
+    });
+
+    // Initialize with all button active and only first 4 posts visible
+    if (allButton) {
+      allButton.classList.add("active");
+
+      // Hide posts beyond the first 4
+      blogPosts.forEach((post, index) => {
+        if (index >= 4) {
+          post.classList.add("hidden");
+        }
+      });
+
+      // Hide load more if there are 4 or fewer total posts
+      if (totalPosts <= 4) {
+        loadMoreButton.style.display = "none";
+      }
+    }
+  });
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .category-tag {
+    font-weight: 500;
+    color: #d80032;
+  }
+
+  /* Styling for active filter button */
+  .active {
+    font-weight: bold;
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.12),
+      0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+
+  /* Apply custom theme colors */
+  :root {
+    --primary-light: #f78ca2;
+    --primary: #d80032;
+    --primary-dark: #3d0c11;
+  }
+  
+  /* Make blog articles clickable */
+  #blog-grid article {
+    cursor: pointer;
+  }
+  
+  /* Style for links in blog content */
+  .blog-excerpt a,
+  #modal-content a {
+    color: #D80032;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .blog-excerpt a:hover,
+  #modal-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* Modal image transition */
+  #modal-image {
+    transition: transform 0.3s ease;
+  }
+  
+  #modal-image:hover {
+    transform: scale(1.02);
+  }
+</style>

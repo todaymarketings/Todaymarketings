@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://todaymarketings.com/sitemap-index.xml

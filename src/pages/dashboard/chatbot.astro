@@ -1,0 +1,126 @@
+---
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import StatusBanner from "../../components/chatbot/StatusBanner.jsx";
+import ChatbotConfig from "../../components/chatbot/ChatbotConfig.jsx";
+import AutomationSettings from "../../components/chatbot/AutomationSettings.jsx";
+import AnalyticsPreview from "../../components/chatbot/AnalyticsPreview.jsx";
+import Button from "../../components/chatbot/Button.jsx";
+
+// In a real app, you would fetch this data from your backend
+const initialChatbotConfig = {
+  name: "Customer Support Assistant",
+  welcomeMessage:
+    "Hello! I'm your 24/7 customer support assistant. How can I help you today?",
+  offlineMessage:
+    "Thanks for your message. Our AI assistant has collected your inquiry and a human agent will respond during business hours.",
+  knowledgeBase: "Product Information",
+  responseTone: "Professional",
+  handoffThreshold: 3,
+};
+
+const initialAutomationSettings = {
+  enableAutomatedResponses: true,
+  enable24Support: true,
+  enableContinuousLearning: true,
+  responseTime: "Instant (0-2 seconds)",
+  autoCategorizeInquiries: true,
+  enableSentimentAnalysis: true,
+  autoPrioritizeUrgent: true,
+  dataCollection: "Essential Only",
+};
+
+const analyticsData = {
+  resolutionRate: {
+    value: "87%",
+    change: "+5% from last week",
+  },
+  responseTime: {
+    value: "2.4s",
+    change: "-0.3s from last week",
+  },
+  satisfaction: {
+    value: "4.8/5",
+    change: "+0.2 from last week",
+  },
+  interactions: {
+    value: "248",
+    change: "+15% from yesterday",
+  },
+};
+
+// This would be handled with client-side JS in a real app
+const handleConfigUpdate = (newConfig) => {
+  console.log("Config updated:", newConfig);
+  // Save to backend
+};
+
+const handleSettingsUpdate = (newSettings) => {
+  console.log("Settings updated:", newSettings);
+  // Save to backend
+};
+
+const handleSaveChanges = () => {
+  console.log("Saving all changes...");
+  // Save to backend
+};
+
+const handleTestChatbot = () => {
+  console.log("Opening chatbot test interface...");
+  // Open chatbot test interface
+};
+---
+
+<DashboardLayout title="Chatbot Automation" currentPage="chatbot">
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-xl font-semibold mb-4 text-[#3D0C11]">
+      Chatbot Automation
+    </h2>
+
+    <StatusBanner isActive={true} client:load />
+
+    <ChatbotConfig
+      initialConfig={initialChatbotConfig}
+      onUpdate={handleConfigUpdate}
+      client:load
+    />
+  </div>
+
+  <!-- Automation Settings -->
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4 text-[#3D0C11]">
+      Automation Settings
+    </h2>
+
+    <AutomationSettings
+      initialSettings={initialAutomationSettings}
+      onUpdate={handleSettingsUpdate}
+      client:load
+    />
+  </div>
+
+  <!-- Analytics Preview -->
+  <AnalyticsPreview stats={analyticsData} client:load />
+
+  <script>
+    // Client-side JavaScript for interactive functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      // Test Chatbot button functionality
+      const testChatbotBtn = document.querySelector("[data-test-chatbot]");
+      if (testChatbotBtn) {
+        testChatbotBtn.addEventListener("click", () => {
+          // Open a modal or redirect to test page
+          window.open("/chatbot-test", "_blank");
+        });
+      }
+
+      // Save Changes button functionality
+      const saveChangesBtn = document.querySelector("[data-save-changes]");
+      if (saveChangesBtn) {
+        saveChangesBtn.addEventListener("click", () => {
+          // Show a success message
+          alert("Changes saved successfully!");
+        });
+      }
+    });
+  </script>
+</DashboardLayout>

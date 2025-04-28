@@ -1,0 +1,322 @@
+---
+// PositionMap.astro
+// Import any necessary dependencies
+// Define your data at the component level
+const companies = [
+  { id: 1, name: "Your Company", color: "#D80032", x: 75, y: 25, size: 4 },
+  { id: 2, name: "TechCorp Inc.", color: "#F78CA2", x: 66, y: 16, size: 3 },
+  {
+    id: 3,
+    name: "GlobalSolutions LLC",
+    color: "#3B82F6",
+    x: 33,
+    y: 40,
+    size: 3,
+  },
+  { id: 4, name: "InnovateTech", color: "#34D399", x: 60, y: 60, size: 3 },
+  { id: 5, name: "DigitalAdvance", color: "#A855F7", x: 25, y: 66, size: 3 },
+  { id: 6, name: "FutureSystems", color: "#FBBF24", x: 75, y: 75, size: 3 },
+];
+
+// Dummy market factors data
+const marketFactors = [
+  { factor: "Market Share", score: 78 },
+  { factor: "Customer Satisfaction", score: 92 },
+  { factor: "Product Innovation", score: 85 },
+  { factor: "Pricing Strategy", score: 71 },
+  { factor: "Global Reach", score: 65 },
+  { factor: "Technical Support", score: 88 },
+  { factor: "Brand Recognition", score: 79 },
+  { factor: "Partner Ecosystem", score: 82 },
+];
+---
+
+<div class="w-full max-w-2xl mx-auto p-2 sm:p-4">
+  <h2 class="text-lg sm:text-xl font-bold mb-2 sm:mb-4">
+    Market Positioning Analysis
+  </h2>
+
+  <!-- Quadrant Chart - Responsive height using aspect ratio -->
+  <div
+    class="relative w-full aspect-square sm:aspect-auto sm:h-64 md:h-80 bg-gray-50 border border-gray-200 rounded"
+  >
+    <!-- Quadrant lines -->
+    <div class="absolute inset-0 flex items-center">
+      <div class="w-full border-t border-gray-300"></div>
+    </div>
+    <div class="absolute inset-0 flex justify-center">
+      <div class="h-full border-l border-gray-300"></div>
+    </div>
+
+    <!-- Quadrant labels - Responsive font size -->
+    <div
+      class="absolute top-1 left-1 sm:top-2 sm:left-2 text-xxs sm:text-xs font-medium text-gray-500"
+    >
+      Market Leaders
+    </div>
+    <div
+      class="absolute top-1 right-1 sm:top-2 sm:right-2 text-xxs sm:text-xs font-medium text-gray-500"
+    >
+      Visionaries
+    </div>
+    <div
+      class="absolute bottom-1 left-1 sm:bottom-2 sm:left-2 text-xxs sm:text-xs font-medium text-gray-500"
+    >
+      Niche Players
+    </div>
+    <div
+      class="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 text-xxs sm:text-xs font-medium text-gray-500"
+    >
+      Challengers
+    </div>
+
+    <!-- X and Y axis labels - With responsive positioning -->
+    <div
+      class="absolute -bottom-4 sm:-bottom-6 left-1/2 transform -translate-x-1/2 text-xxs sm:text-xs text-gray-500"
+    >
+      Feature Completeness →
+    </div>
+    <div
+      class="absolute -left-4 sm:-left-6 top-1/2 transform -translate-y-1/2 rotate-90 text-xxs sm:text-xs text-gray-500"
+    >
+      Market Execution →
+    </div>
+
+    <!-- Company dots - now rendered with Astro -->
+    {
+      companies.map((company) => (
+        <div
+          class="company-dot absolute rounded-full cursor-pointer hover:ring-2 hover:ring-blue-300 transition-all"
+          data-company-id={company.id}
+          data-company-name={company.name}
+          style={`
+          background-color: ${company.color};
+          top: ${company.y}%;
+          left: ${company.x}%;
+          width: ${company.size * 0.2}rem;
+          height: ${company.size * 0.2}rem;
+          transform: translate(-50%, -50%);
+          @media (min-width: 640px) {
+            width: ${company.size * 0.25}rem;
+            height: ${company.size * 0.25}rem;
+          }
+        `}
+          title={company.name}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Legend and Controls - Responsive layout -->
+  <div class="mt-4 text-xs sm:text-sm">
+    <div class="flex items-center mb-2">
+      <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#D80032] mr-1 sm:mr-2">
+      </div>
+      <span id="selected-company-name">Your Company</span>
+    </div>
+    <div
+      class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-xxs sm:text-xs text-gray-600"
+    >
+      <span class="mb-1 sm:mb-0"
+        >AI-generated positioning based on 42 market factors</span
+      >
+      <button
+        id="details-toggle"
+        class="text-[#D80032] hover:text-[#3D0C11] font-medium"
+      >
+        Details
+      </button>
+    </div>
+  </div>
+
+  <!-- Details Panel (initially hidden) - Responsive layout -->
+  <div
+    id="details-panel"
+    class="mt-3 sm:mt-4 p-2 sm:p-4 bg-gray-50 border border-gray-200 rounded hidden"
+  >
+    <h3 class="text-sm sm:text-base font-bold mb-2" id="details-company-name">
+      Your Company Performance Factors
+    </h3>
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2 text-xs sm:text-sm"
+    >
+      {
+        marketFactors.map((item) => (
+          <div class="flex justify-between">
+            <span>{item.factor}:</span>
+            <div class="flex items-center">
+              <div class="w-16 sm:w-24 h-1 sm:h-2 bg-gray-200 rounded overflow-hidden mr-1 sm:mr-2">
+                <div
+                  class="h-full bg-[#D80032]"
+                  style={`width: ${item.score}%`}
+                />
+              </div>
+              <span class="text-xxs sm:text-xs">{item.score}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-3 sm:mt-4 flex flex-col sm:flex-row sm:justify-between space-y-2 sm:space-y-0"
+    >
+      <button
+        id="reset-button"
+        class="w-full sm:w-auto px-2 sm:px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs sm:text-sm"
+      >
+        Reset Selection
+      </button>
+      <button
+        id="refresh-button"
+        class="w-full sm:w-auto px-2 sm:px-3 py-1 bg-[#D80032] hover:bg-[#B8002B] text-white rounded text-xs sm:text-sm"
+      >
+        Refresh Analysis
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Custom utility classes for extra small text */
+  .text-xxs {
+    font-size: 0.65rem;
+    line-height: 0.75rem;
+  }
+
+  /* Make company dots responsive */
+  @media (max-width: 640px) {
+    .company-dot {
+      transform: scale(0.8) translate(-50%, -50%);
+    }
+  }
+
+  /* Ensure the chart maintains proper aspect ratio on small screens */
+  @media (max-width: 480px) {
+    .aspect-square {
+      aspect-ratio: 1 / 1;
+      height: auto !important;
+    }
+  }
+</style>
+
+<script>
+  // Client-side JavaScript to handle interactivity
+  document.addEventListener("DOMContentLoaded", () => {
+    // Elements
+    const detailsToggle = document.getElementById("details-toggle");
+    const detailsPanel = document.getElementById("details-panel");
+    const selectedCompanyName = document.getElementById(
+      "selected-company-name"
+    );
+    const detailsCompanyName = document.getElementById("details-company-name");
+    const resetButton = document.getElementById("reset-button");
+    const refreshButton = document.getElementById("refresh-button");
+    const companyDots = document.querySelectorAll(".company-dot");
+
+    // Initial company data (same as the server-side data)
+    let companies = [
+      { id: 1, name: "Your Company", color: "#D80032", x: 75, y: 25, size: 4 },
+      { id: 2, name: "TechCorp Inc.", color: "#F78CA2", x: 66, y: 16, size: 3 },
+      {
+        id: 3,
+        name: "GlobalSolutions LLC",
+        color: "#3B82F6",
+        x: 33,
+        y: 40,
+        size: 3,
+      },
+      { id: 4, name: "InnovateTech", color: "#34D399", x: 60, y: 60, size: 3 },
+      {
+        id: 5,
+        name: "DigitalAdvance",
+        color: "#A855F7",
+        x: 25,
+        y: 66,
+        size: 3,
+      },
+      { id: 6, name: "FutureSystems", color: "#FBBF24", x: 75, y: 75, size: 3 },
+    ];
+
+    let selectedCompanyId = 1; // Default to "Your Company"
+
+    // Toggle details panel visibility
+    detailsToggle.addEventListener("click", () => {
+      const isHidden = detailsPanel.classList.contains("hidden");
+      if (isHidden) {
+        detailsPanel.classList.remove("hidden");
+        detailsToggle.textContent = "Hide Details";
+      } else {
+        detailsPanel.classList.add("hidden");
+        detailsToggle.textContent = "Details";
+      }
+    });
+
+    // Handle company dot clicks
+    companyDots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const companyId = parseInt(dot.dataset.companyId);
+        const companyName = dot.dataset.companyName;
+        selectedCompanyId = companyId;
+
+        // Update UI
+        selectedCompanyName.textContent = companyName;
+        detailsCompanyName.textContent = `${companyName} Performance Factors`;
+
+        // Show details panel if not already visible
+        if (detailsPanel.classList.contains("hidden")) {
+          detailsPanel.classList.remove("hidden");
+          detailsToggle.textContent = "Hide Details";
+        }
+      });
+    });
+
+    // Reset selection
+    resetButton.addEventListener("click", () => {
+      const yourCompany = companies.find((c) => c.id === 1);
+      if (yourCompany) {
+        selectedCompanyId = 1;
+        selectedCompanyName.textContent = yourCompany.name;
+        detailsCompanyName.textContent = `${yourCompany.name} Performance Factors`;
+      }
+    });
+
+    // Refresh analysis
+    refreshButton.addEventListener("click", () => {
+      // Update company positions with random variation
+      companyDots.forEach((dot, index) => {
+        if (index < companies.length) {
+          const company = companies[index];
+
+          // Calculate new positions with constraints
+          const newX = Math.max(
+            15,
+            Math.min(85, company.x + (Math.random() * 20 - 10))
+          );
+          const newY = Math.max(
+            15,
+            Math.min(85, company.y + (Math.random() * 20 - 10))
+          );
+
+          // Update the data
+          companies[index].x = newX;
+          companies[index].y = newY;
+
+          // Update DOM
+          dot.style.left = `${newX}%`;
+          dot.style.top = `${newY}%`;
+        }
+      });
+    });
+
+    // Handle window resizing
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      // Debounce resize events
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // You could add additional responsive adjustments here if needed
+      }, 250);
+    });
+  });
+</script>

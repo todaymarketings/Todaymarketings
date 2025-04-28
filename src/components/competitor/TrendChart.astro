@@ -1,0 +1,169 @@
+---
+// TrendChart.astro
+// Enhanced version using Chart.js for better visualization
+---
+
+<div class="relative">
+  <div class="h-64">
+    <canvas id="market-trend-chart"></canvas>
+  </div>
+  <div class="absolute top-0 right-0">
+    <select
+      id="time-period"
+      class="text-sm border border-gray-300 rounded p-1 bg-white"
+    >
+      <option value="7d">Last 7 days</option>
+      <option value="30d" selected>Last 30 days</option>
+      <option value="90d">Last 90 days</option>
+      <option value="1y">Last year</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  // Import Chart.js from CDN
+  import "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const chartCanvas = document.getElementById("market-trend-chart");
+    const timePeriodSelector = document.getElementById("time-period");
+    let marketChart = null;
+
+    // Define market data for different time periods
+    const marketData = {
+      "7d": [
+        { name: "Your Co.", value: 22.5 },
+        { name: "TechCorp", value: 19.8 },
+        { name: "GlobalSol", value: 15.4 },
+        { name: "InnoTech", value: 12.7 },
+        { name: "DigitalAd", value: 9.3 },
+        { name: "FutureSys", value: 7.1 },
+      ],
+      "30d": [
+        { name: "Your Co.", value: 25.0 },
+        { name: "TechCorp", value: 20.5 },
+        { name: "GlobalSol", value: 16.7 },
+        { name: "InnoTech", value: 13.2 },
+        { name: "DigitalAd", value: 10.8 },
+        { name: "FutureSys", value: 8.5 },
+      ],
+      "90d": [
+        { name: "Your Co.", value: 23.7 },
+        { name: "TechCorp", value: 21.9 },
+        { name: "GlobalSol", value: 18.2 },
+        { name: "InnoTech", value: 14.1 },
+        { name: "DigitalAd", value: 11.5 },
+        { name: "FutureSys", value: 9.3 },
+      ],
+      "1y": [
+        { name: "Your Co.", value: 20.3 },
+        { name: "TechCorp", value: 24.6 },
+        { name: "GlobalSol", value: 19.8 },
+        { name: "InnoTech", value: 15.9 },
+        { name: "DigitalAd", value: 12.7 },
+        { name: "FutureSys", value: 10.5 },
+      ],
+    };
+
+    // Color generator function that maintains the original color palette
+    function getBarColor(index) {
+      if (index === 0) return "rgba(216, 0, 50, 1)"; // Your Co. - solid red
+      if (index === 1) return "rgba(247, 140, 162, 1)"; // TechCorp - lighter red
+
+      // For other companies, alternate between the two colors with varying opacities
+      const baseColor =
+        index % 2 === 0 ? "rgba(216, 0, 50, " : "rgba(247, 140, 162, ";
+
+      // Gradually decrease opacity for each subsequent company
+      const opacity = 0.9 - index * 0.1;
+      return baseColor + Math.max(opacity, 0.4) + ")";
+    }
+
+    // Initialize chart with the default selected value
+    if (chartCanvas) {
+      const initialPeriod = timePeriodSelector
+        ? timePeriodSelector.value
+        : "30d";
+      renderChart(chartCanvas, marketData[initialPeriod]);
+    }
+
+    // Add event listener for time period selector
+    if (timePeriodSelector) {
+      timePeriodSelector.addEventListener("change", () => {
+        const selectedPeriod = timePeriodSelector.value;
+        console.log("Time period changed to:", selectedPeriod);
+        renderChart(chartCanvas, marketData[selectedPeriod]);
+      });
+    }
+
+    function renderChart(canvas, data) {
+      // If chart already exists, destroy it to prevent memory leaks
+      if (marketChart) {
+        marketChart.destroy();
+      }
+
+      // Extract labels and values from data
+      const labels = data.map((item) => item.name);
+      const values = data.map((item) => item.value);
+      const backgroundColors = labels.map((_, index) => getBarColor(index));
+
+      // Create new chart
+      marketChart = new Chart(canvas, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Market Share (%)",
+              data: values,
+              backgroundColor: backgroundColors,
+              borderColor: backgroundColors.map((color) =>
+                color.replace(", ", ", 1.0").replace(")", ")")
+              ),
+              borderWidth: 1,
+              borderRadius: 4,
+              borderSkipped: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return `${context.raw}% market share`;
+                },
+              },
+            },
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function (value) {
+                  return value + "%";
+                },
+              },
+              grid: {
+                drawBorder: false,
+              },
+            },
+            x: {
+              grid: {
+                display: false,
+              },
+            },
+          },
+          animation: {
+            duration: 1000,
+          },
+        },
+      });
+    }
+  });
+</script>

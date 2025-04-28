@@ -1,0 +1,113 @@
+---
+import { Icon } from "astro-icon";
+
+interface Props {
+  title: string;
+  value: string;
+  change: string;
+  positive: boolean;
+  icon: string;
+}
+
+const { title, value, change, positive, icon } = Astro.props;
+---
+
+<div class="bg-white p-5 rounded-lg shadow">
+  <div class="flex justify-between items-start">
+    <div>
+      <p class="text-gray-500 text-sm">{title}</p>
+      <h3 class="text-2xl font-bold text-[#3D0C11] mt-1">{value}</h3>
+      <p
+        class={`text-sm mt-1 flex items-center ${positive ? "text-green-600" : "text-[#D80032]"}`}
+      >
+        <span class="flex items-center">
+          {
+            positive ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12 7a1 1 0 01-1 1H9a1 1 0 01-1-1V6a1 1 0 011-1h2a1 1 0 011 1v1zm-6 6a1 1 0 011-1h2a1 1 0 011 1v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-1zm6 0a1 1 0 011-1h2a1 1 0 011 1v1a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1z"
+                  clip-rule="evenodd"
+                />
+                <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm12 12H5V5h10v10z" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 mr-1"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M16 8a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 010-1.414l2.293-2.293H13a1 1 0 010-2h3a1 1 0 011 1v3z"
+                  clip-rule="evenodd"
+                />
+                <path d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm12 12H5V5h10v10z" />
+              </svg>
+            )
+          }
+          {change}
+        </span>
+      </p>
+    </div>
+    <div class="bg-[#F9DEC9] p-3 rounded-full">
+      <div class="text-[#D80032] h-6 w-6">
+        {
+          icon === "chart-pie" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+              <path d="M22 12A10 10 0 0 0 12 2v10z" />
+            </svg>
+          )
+        }
+        {
+          icon === "trending-up" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg>
+          )
+        }
+        {
+          icon === "target" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>

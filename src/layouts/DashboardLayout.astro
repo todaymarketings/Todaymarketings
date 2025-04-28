@@ -1,0 +1,451 @@
+---
+// src/layouts/DashboardLayout.astro
+import "../styles/global.css"; // Make sure this exists for Tailwind to work
+import logo from "../assets/logo.svg";
+import favicon from "../assets/favicon.png";
+import NotificationPopup from "../components/NotificationPopup";
+
+interface Props {
+  title: string;
+  currentPage?: string;
+}
+
+const { title, currentPage = "overview" } = Astro.props;
+---
+
+<html lang="en" style={{ scrollbarWidth: "none" }}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-50">
+    <div class="flex min-h-screen relative">
+      <!-- Mobile menu overlay -->
+      <div
+        id="mobile-overlay"
+        class="fixed inset-0 bg-gray-900 bg-opacity-50 z-20 hidden lg:hidden"
+      >
+      </div>
+
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="bg-white border-r border-gray-200 fixed h-full overflow-y-auto transition-all duration-300 w-16 z-30 transform lg:transform-none lg:translate-x-0"
+        style={{ overflowX: "clip" }}
+      >
+        <div class="p-4 flex items-center justify-center">
+          <!-- Small logo (visible when collapsed) - Using favicon -->
+          <div id="small-logo" class="text-[#D80032] text-2xl block">
+            <img src={favicon.src} alt="Logo" class="h-8 w-8" />
+          </div>
+
+          <!-- Full logo (visible when expanded) - Using the imported logo -->
+          <div id="full-logo" class="hidden">
+            <div class="flex items-center space-x-3">
+              <img src={logo.src} alt="Company Logo" class="h-8" />
+            </div>
+          </div>
+        </div>
+
+        <nav class="mt-4" style={{ justifyItems: "flex-start" }}>
+          <a
+            href="/dashboard"
+            class={`flex items-center py-3 w-full ${currentPage === "overview" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap"
+              >Overview</span
+            >
+          </a>
+
+          <a
+            href="/dashboard/EmailMarketing"
+            class={`flex items-center py-3 w-full ${currentPage === "EmailMarketing" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap"
+              >Email Marketing</span
+            >
+          </a>
+
+          <a
+            href="/dashboard/SocialMedia"
+            class={`flex items-center py-3 w-full ${currentPage === "SocialMedia" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 21a9.01 9.01 0 003.12-.553c-.06-.162-.115-.326-.167-.493A7.95 7.95 0 0112 19a7.95 7.95 0 01-2.952.553c-.053.167-.108.331-.168.493A9.01 9.01 0 0012 21zm-5.674-4.206c.055-.121.114-.243.175-.363C5.162 15.295 5 13.93 5 13a7 7 0 017-7c2.793 0 5.193 1.583 6.366 3.886.52-.309 1.086-.565 1.679-.757A9 9 0 0012 4a9 9 0 00-9 9c0 1.471.355 2.859.981 4.085.247-.088.52-.172.945-.388.312-.159.695-.353 1.4-.803zM8 13a1 1 0 100-2 1 1 0 000 2zm0 0V9.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L6 9.414V13a2 2 0 104 0zm10-2a1 1 0 10-2 0v.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L18 11.586V11zm-6 6a1 1 0 100 2 1 1 0 000-2zm0 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L16 20.586V17a2 2 0 10-4 0z"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap"
+              >Social Media</span
+            >
+          </a>
+
+          <a
+            href="/dashboard/CompetitorAnalysis"
+            class={`flex items-center py-3 w-full ${currentPage === "CompetitorAnalysis" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap"
+              >Competitor Analysis</span
+            >
+          </a>
+
+          <a
+            href="/dashboard/chatbot"
+            class={`flex items-center py-3 w-full ${currentPage === "chatbot" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap">Chatbot</span
+            >
+          </a>
+
+          <a
+            href="/dashboard/settings"
+            class={`flex items-center py-3 w-full ${currentPage === "settings" ? "bg-[#F9DEC9] text-[#D80032]" : "text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032]"}`}
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap"
+              >Settings</span
+            >
+          </a>
+
+          <!-- Logout option (added) -->
+          <a
+            href="/"
+            class="flex items-center py-3 w-full text-[#3D0C11] hover:bg-[#F9DEC9] hover:text-[#D80032] mt-auto"
+          >
+            <div class="w-16 flex items-center justify-center flex-shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                ></path>
+              </svg>
+            </div>
+            <span class="sidebar-text opacity-0 whitespace-nowrap">Logout</span>
+          </a>
+        </nav>
+
+        <!-- Toggle button at bottom of sidebar -->
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center">
+          <button
+            id="toggle-sidebar"
+            class="bg-white rounded-full p-1 border border-gray-200 text-[#3D0C11] hover:text-[#D80032] shadow-sm transition-all duration-300 hidden lg:block"
+          >
+            <svg
+              id="expand-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 5l7 7-7 7"></path>
+            </svg>
+            <svg
+              id="collapse-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 hidden"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main
+        id="main-content"
+        class="ml-0 lg:ml-16 flex-1 transition-all duration-300 w-full"
+      >
+        <header
+          class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-4 lg:px-6 sticky top-0 z-10"
+        >
+          <!-- Mobile menu button -->
+          <button id="mobile-menu-button" class="text-[#3D0C11] mr-2 lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+
+          <h1 class="text-lg lg:text-xl font-semibold text-[#3D0C11] truncate">
+            {title}
+          </h1>
+          <div class="flex items-center space-x-2 lg:space-x-4">
+            <button class="text-[#3D0C11] hover:text-[#D80032]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 lg:h-6 lg:w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </button>
+
+            {
+              /* We need to wrap NotificationPopup in a div with the same layout structure as other header icons */
+            }
+            <div class="flex items-center">
+              <NotificationPopup client:load />
+            </div>
+
+            <button class="text-[#3D0C11] hover:text-[#D80032]">
+              <a href="/dashboard/settings">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 lg:h-6 lg:w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+              </a>
+            </button>
+          </div>
+        </header>
+
+        <div class="p-4 lg:p-6">
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Add client-side JavaScript for sidebar toggle functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.getElementById("main-content");
+        const toggleButton = document.getElementById("toggle-sidebar");
+        const expandIcon = document.getElementById("expand-icon");
+        const collapseIcon = document.getElementById("collapse-icon");
+        const smallLogo = document.getElementById("small-logo");
+        const fullLogo = document.getElementById("full-logo");
+        const sidebarTexts = document.querySelectorAll(".sidebar-text");
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileOverlay = document.getElementById("mobile-overlay");
+
+        let sidebarExpanded = false;
+        let sidebarVisible = window.innerWidth >= 1024; // lg breakpoint
+
+        // Function to handle sidebar visibility on mobile
+        const toggleMobileSidebar = () => {
+          if (sidebar.classList.contains("-translate-x-full")) {
+            // Show sidebar
+            sidebar.classList.remove("-translate-x-full");
+            mobileOverlay.classList.remove("hidden");
+          } else {
+            // Hide sidebar
+            sidebar.classList.add("-translate-x-full");
+            mobileOverlay.classList.add("hidden");
+          }
+        };
+
+        // Initialize mobile sidebar position
+        if (window.innerWidth < 1024) {
+          sidebar.classList.add("-translate-x-full");
+        }
+
+        // Toggle sidebar expansion (desktop)
+        toggleButton.addEventListener("click", () => {
+          sidebarExpanded = !sidebarExpanded;
+
+          if (sidebarExpanded) {
+            // Expand sidebar
+            sidebar.classList.remove("w-16");
+            sidebar.classList.add("w-64");
+            mainContent.classList.remove("lg:ml-16");
+            mainContent.classList.add("lg:ml-64");
+            expandIcon.classList.add("hidden");
+            collapseIcon.classList.remove("hidden");
+            smallLogo.classList.add("hidden");
+            fullLogo.classList.remove("hidden");
+
+            // Show text with a slight delay for smoother transition
+            setTimeout(() => {
+              sidebarTexts.forEach((text) => {
+                text.classList.remove("opacity-0");
+              });
+            }, 150);
+          } else {
+            // Collapse sidebar
+            sidebar.classList.remove("w-64");
+            sidebar.classList.add("w-16");
+            mainContent.classList.remove("lg:ml-64");
+            mainContent.classList.add("lg:ml-16");
+            expandIcon.classList.remove("hidden");
+            collapseIcon.classList.add("hidden");
+            smallLogo.classList.remove("hidden");
+            fullLogo.classList.add("hidden");
+
+            // Hide text immediately
+            sidebarTexts.forEach((text) => {
+              text.classList.add("opacity-0");
+            });
+          }
+        });
+
+        // Mobile menu button event
+        mobileMenuButton.addEventListener("click", toggleMobileSidebar);
+
+        // Close sidebar when clicking overlay
+        mobileOverlay.addEventListener("click", toggleMobileSidebar);
+
+        // Handle window resize
+        window.addEventListener("resize", () => {
+          const isDesktop = window.innerWidth >= 1024;
+
+          // Toggle between mobile and desktop layouts
+          if (isDesktop && !sidebarVisible) {
+            sidebar.classList.remove("-translate-x-full");
+            mobileOverlay.classList.add("hidden");
+            sidebarVisible = true;
+          } else if (!isDesktop && sidebarVisible) {
+            sidebar.classList.add("-translate-x-full");
+            sidebarVisible = false;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

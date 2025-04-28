@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.jsx";
+import Features from "../components/Features.jsx";
+import HowItWorks from "../components/HowItWorks.jsx";
+import Testimonials from "../components/Testimonials.jsx";
+import Partners from "../components/Partners.jsx";
+import FAQ from "../components/FAQ.jsx";
+import PricingSection from "../components/PricingSection.jsx";
+import AIROISimulator from "../components/AIROISimulator";
+// SEO metadata for the homepage
+const seoData = {
+  title: "All-in-One AI Marketing Platform",
+  description:
+    "Automate social media, personalize email campaigns, offer 24/7 chatbot support, and track competitors all with Today Marketings' AI-powered platform built to grow your business smarter and faster.",
+  keywords:
+    "AI marketing platform, social media automation, email marketing AI, AI chatbot support, marketing automation tools, AI competitor analysis, digital marketing automation, personalized campaigns, marketing AI dashboard",
+  canonical: "https://todaymarketings.com/",
+  image: "../assets/favicon.png",
+  ogType: "website",
+};
+---
+
+<Layout
+  title="Home"
+  title={seoData.title}
+  description={seoData.description}
+  keywords={seoData.keywords}
+  canonical={seoData.canonical}
+  image={seoData.image}
+  ogType={seoData.ogType}
+>
+  <div class="overflow-x-hidden w-full">
+    <Hero client:load />
+    <Features client:load />
+    <HowItWorks client:load />
+    <Testimonials client:load />
+    <Partners client:load />
+    <!-- <AIROISimulator id="ai-roi-simulator" client:load /> -->
+    <div id="ai-roi-simulator">
+      <AIROISimulator client:load />
+    </div>
+    <!-- <PricingSection client:load /> -->
+    <FAQ client:visible />
+  </div>
+</Layout>
+
+<style>
+  /* Apply these styles to prevent horizontal scrolling */
+  :global(html),
+  :global(body) {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>

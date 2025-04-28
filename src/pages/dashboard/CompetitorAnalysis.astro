@@ -1,0 +1,76 @@
+---
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import CompetitorMetricsCard from "../../components/competitor/MetricsCard.astro";
+import CompetitorTable from "../../components/competitor/Table.astro";
+import TrendChart from "../../components/competitor/TrendChart.astro";
+import StrategicInsights from "../../components/competitor/StrategicInsights.astro";
+import MarketPositionMap from "../../components/competitor/PositionMap.astro";
+---
+
+<DashboardLayout title="Competitor Analysis" currentPage="CompetitorAnalysis">
+  <div class="p-6">
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-[#3D0C11] mb-2">
+        Competitor Analysis
+      </h1>
+      <p class="text-gray-600">
+        Monitor competitors, identify market trends, and uncover strategic
+        opportunities with AI-powered insights.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <CompetitorMetricsCard
+        title="Market Share"
+        value="24.8%"
+        change="+2.4%"
+        positive={true}
+        icon="chart-pie"
+      />
+      <CompetitorMetricsCard
+        title="Competitor Growth"
+        value="15.3%"
+        change="-0.8%"
+        positive={false}
+        icon="trending-up"
+      />
+      <CompetitorMetricsCard
+        title="Opportunity Score"
+        value="76/100"
+        change="+5"
+        positive={true}
+        icon="target"
+      />
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div class="bg-white p-5 rounded-lg shadow col-span-2">
+        <h2 class="text-xl font-semibold text-[#3D0C11] mb-4">
+          Market Share Trends
+        </h2>
+        <TrendChart />
+      </div>
+      <div class="bg-white p-5 rounded-lg shadow">
+        <h2 class="text-xl font-semibold text-[#3D0C11] mb-4">
+          Strategic Insights
+        </h2>
+        <StrategicInsights />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-5 rounded-lg shadow col-span-2">
+        <h2 class="text-xl font-semibold text-[#3D0C11] mb-4">
+          Competitor Performance
+        </h2>
+        <CompetitorTable />
+      </div>
+      <div class="bg-white p-5 rounded-lg shadow">
+        <h2 class="text-xl font-semibold text-[#3D0C11] mb-4">
+          Market Position Map
+        </h2>
+        <MarketPositionMap />
+      </div>
+    </div>
+  </div>
+</DashboardLayout>

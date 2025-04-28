@@ -1,0 +1,162 @@
+---
+import CompetitorReport from "./CompetitorReport";
+import ReportActions from "./ReportActions";
+
+// Define competitors data at the component level
+const competitors = [
+  {
+    name: "TechCorp Inc.",
+    marketShare: "28.5%",
+    growth: "+5.2%",
+    products: 42,
+    sentiment: "Positive",
+    score: 85,
+  },
+  {
+    name: "GlobalSolutions LLC",
+    marketShare: "23.1%",
+    growth: "+1.9%",
+    products: 37,
+    sentiment: "Neutral",
+    score: 72,
+  },
+  {
+    name: "InnovateTech",
+    marketShare: "18.7%",
+    growth: "-0.8%",
+    products: 28,
+    sentiment: "Negative",
+    score: 64,
+  },
+  {
+    name: "DigitalAdvance",
+    marketShare: "15.4%",
+    growth: "+3.4%",
+    products: 31,
+    sentiment: "Positive",
+    score: 79,
+  },
+  {
+    name: "FutureSystems",
+    marketShare: "14.3%",
+    growth: "+2.1%",
+    products: 24,
+    sentiment: "Neutral",
+    score: 68,
+  },
+];
+
+const getSentimentColor = (sentiment) => {
+  if (sentiment === "Positive") return "text-green-600";
+  if (sentiment === "Negative") return "text-[#D80032]";
+  return "text-yellow-600";
+};
+
+const getScoreColor = (score) => {
+  if (score >= 80) return "text-green-600";
+  if (score >= 70) return "text-blue-600";
+  if (score >= 60) return "text-yellow-600";
+  return "text-[#D80032]";
+};
+---
+
+<script>
+  // Client-side script to handle button click
+  document.addEventListener("DOMContentLoaded", () => {
+    const analysisButton = document.getElementById("runAnalysisBtn");
+    const reportContainer = document.getElementById("reportContainer");
+    const actionsContainer = document.getElementById("reportActionsContainer");
+
+    if (analysisButton) {
+      analysisButton.addEventListener("click", () => {
+        // Toggle report visibility
+        if (reportContainer && actionsContainer) {
+          if (reportContainer.classList.contains("hidden")) {
+            reportContainer.classList.remove("hidden");
+            actionsContainer.classList.remove("hidden");
+            analysisButton.querySelector("span").textContent =
+              "Hide AI Analysis";
+          } else {
+            reportContainer.classList.add("hidden");
+            actionsContainer.classList.add("hidden");
+            analysisButton.querySelector("span").textContent =
+              "Run AI Analysis";
+          }
+        }
+      });
+    }
+  });
+</script>
+
+{/* Component Markup */}
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white">
+    <thead class="bg-[#F9DEC9] text-[#3D0C11]">
+      <tr>
+        <th class="py-3 px-4 text-left font-semibold">Competitor</th>
+        <th class="py-3 px-4 text-left font-semibold">Market Share</th>
+        <th class="py-3 px-4 text-left font-semibold">Growth</th>
+        <th class="py-3 px-4 text-left font-semibold">Products</th>
+        <th class="py-3 px-4 text-left font-semibold">Sentiment</th>
+        <th class="py-3 px-4 text-left font-semibold">AI Score</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      {
+        competitors.map((competitor) => (
+          <tr class="hover:bg-gray-50">
+            <td class="py-3 px-4 font-medium">{competitor.name}</td>
+            <td class="py-3 px-4">{competitor.marketShare}</td>
+            <td
+              class={`py-3 px-4 ${competitor.growth.startsWith("+") ? "text-green-600" : "text-[#D80032]"}`}
+            >
+              {competitor.growth}
+            </td>
+            <td class="py-3 px-4">{competitor.products}</td>
+            <td class={`py-3 px-4 ${getSentimentColor(competitor.sentiment)}`}>
+              {competitor.sentiment}
+            </td>
+            <td
+              class={`py-3 px-4 font-semibold ${getScoreColor(competitor.score)}`}
+            >
+              {competitor.score}/100
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4">
+  <button
+    id="runAnalysisBtn"
+    class="text-[#D80032] hover:text-[#3D0C11] font-medium flex items-center"
+  >
+    <span>Run AI Analysis</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 ml-1"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+      ></path>
+    </svg>
+  </button>
+</div>
+
+{/* AI Report Container - Hidden by default */}
+<div id="reportContainer" class="mt-6 hidden">
+  <CompetitorReport client:load />
+</div>
+
+{/* Report Actions - Hidden by default */}
+<div id="reportActionsContainer" class="hidden">
+  <ReportActions client:load />
+</div>

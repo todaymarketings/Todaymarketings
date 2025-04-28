@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PricingSection from "../components/PricingSection.jsx";
+import FAQ from "../components/FAQ.jsx";
+import PricingTable from "../components/PricingTable";
+---
+
+<Layout title="Pricing">
+  <PricingSection client:load />
+
+  <div id="pricing-table" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <PricingTable client:load />
+  </div>
+</Layout>

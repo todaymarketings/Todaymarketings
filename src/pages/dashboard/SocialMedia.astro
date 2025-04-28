@@ -1,0 +1,71 @@
+---
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import SocialMediaOverview from "../../components/SocialMediaOverview.jsx";
+import ScheduledPosts from "../../components/ScheduledPosts.jsx";
+import TrendTracker from "../../components/TrendTracker.jsx";
+import AudienceEngagement from "../../components/AudienceEngagement.jsx";
+import AiSuggestions from "../../components/AiSuggestions.jsx";
+import CreatePostModal from "../../components/CreatePostModal.jsx";
+---
+
+<DashboardLayout title="Social Media" currentPage="SocialMedia">
+  <div class="space-y-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-semibold text-[#3D0C11]">
+        Social Media Management
+      </h1>
+      <button
+        id="createPostBtn"
+        class="bg-[#D80032] hover:bg-maroondark text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors flex items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+        Create New Post
+      </button>
+    </div>
+
+    <p class="text-[#3D0C11] opacity-70 mb-6">
+      Automate posts, track trends, and engage your audience in real-time with
+      AI precision.
+    </p>
+
+    <SocialMediaOverview client:load />
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <ScheduledPosts client:load />
+      <TrendTracker client:load />
+    </div>
+
+    <AudienceEngagement client:load />
+
+    <AiSuggestions client:load />
+
+    <CreatePostModal client:load />
+  </div>
+</DashboardLayout>
+
+<script>
+  // Client-side script to connect the button to the modal
+  document.addEventListener("DOMContentLoaded", () => {
+    const createPostBtn = document.getElementById("createPostBtn");
+
+    if (createPostBtn) {
+      createPostBtn.addEventListener("click", () => {
+        // Create a custom event to open the modal from the Astro component
+        const openModalEvent = new CustomEvent("openCreatePostModal", {
+          detail: { source: "dashboard" },
+        });
+        document.dispatchEvent(openModalEvent);
+      });
+    }
+  });
+</script>

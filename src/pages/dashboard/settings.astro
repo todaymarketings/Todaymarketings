@@ -1,0 +1,1037 @@
+---
+// src/pages/dashboard/settings.astro
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+
+// Mock user data
+const userData = {
+  fullName: "Jane Smith",
+  jobTitle: "Marketing Manager",
+  email: "jane@example.com",
+  phone: "(555) 123-4567",
+  company: "Acme Marketing",
+  profileImage: "https://placehold.co/200x200/e95c7f/ffffff?text=JS",
+};
+
+// Mock API connections
+const apiConnections = [
+  { name: "Google Ads", status: "connected", lastSync: "2 hours ago" },
+  { name: "Facebook Ads", status: "connected", lastSync: "1 hour ago" },
+  { name: "LinkedIn Ads", status: "not_connected", lastSync: null },
+  { name: "Twitter Ads", status: "not_connected", lastSync: null },
+];
+
+// Mock reporting preferences
+const reportingPreferences = {
+  defaultPeriod: "30",
+  refreshRate: "60",
+  scheduledReports: "weekly",
+};
+
+// Mock notification preferences
+const notificationPreferences = {
+  emailNotifications: true,
+  aiSuggestions: true,
+  performanceAlerts: true,
+  realtimeCollaboration: false,
+};
+---
+
+<DashboardLayout title="Settings" currentPage="settings">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">Account Settings</h1>
+    <button
+      id="save-all-button-top"
+      class="bg-maroon2 text-white px-4 py-2 rounded hover:bg-maroondark transition-colors"
+    >
+      Save All Changes
+    </button>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4">Profile Information</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Profile Image Column -->
+      <div class="flex flex-col items-center">
+        <div
+          class="w-32 h-32 bg-gray-200 rounded-full overflow-hidden mb-4 relative"
+        >
+          <img
+            id="profile-image"
+            src={userData.profileImage}
+            alt="Profile"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
+            id="change-photo-overlay"
+          >
+            <span class="text-white text-sm font-medium">Change photo</span>
+          </div>
+          <input
+            type="file"
+            id="profile-upload"
+            class="hidden"
+            accept="image/*"
+          />
+        </div>
+        <p class="text-sm text-gray-600 mb-1" id="profile-name-display">
+          {userData.fullName}
+        </p>
+        <p class="text-xs text-gray-500" id="profile-title-display">
+          {userData.jobTitle}
+        </p>
+      </div>
+
+      <!-- Main Profile Info -->
+      <div class="md:col-span-2">
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Full Name</label
+              >
+              <input
+                id="full-name-input"
+                type="text"
+                value={userData.fullName}
+                class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Job Title</label
+              >
+              <input
+                id="job-title-input"
+                type="text"
+                value={userData.jobTitle}
+                class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Email Address</label
+              >
+              <input
+                id="email-input"
+                type="email"
+                value={userData.email}
+                class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Phone Number</label
+              >
+              <input
+                id="phone-input"
+                type="tel"
+                value={userData.phone}
+                class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Company</label
+            >
+            <input
+              id="company-input"
+              type="text"
+              value={userData.company}
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4">Marketing Platform Settings</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-md font-medium mb-2">API Connections</h3>
+        <div class="space-y-4" id="api-connections-container">
+          {
+            apiConnections.map((connection) => (
+              <div class="connection-item" data-name={connection.name}>
+                <div class="flex justify-between items-center mb-1">
+                  <label class="text-sm font-medium text-gray-700">
+                    {connection.name}
+                  </label>
+                  <span
+                    class={`text-xs ${connection.status === "connected" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"} px-2 py-1 rounded connection-status`}
+                  >
+                    {connection.status === "connected"
+                      ? "Connected"
+                      : "Not Connected"}
+                  </span>
+                </div>
+                <div class="flex items-center justify-between">
+                  {connection.status === "connected" ? (
+                    <>
+                      <span class="text-xs text-gray-500">
+                        Last synced: {connection.lastSync}
+                      </span>
+                      <button class="text-sm text-maroondark hover:text-maroondark connection-toggle-btn">
+                        Disconnect
+                      </button>
+                    </>
+                  ) : (
+                    <button class="text-sm text-maroondark hover:text-maroondark connection-toggle-btn">
+                      Connect
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-md font-medium mb-2">Reporting Preferences</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Default Reporting Period</label
+            >
+            <select
+              id="reporting-period"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            >
+              <option value="7">Last 7 days</option>
+              <option value="14">Last 14 days</option>
+              <option
+                value="30"
+                selected={reportingPreferences.defaultPeriod === "30"}
+                >Last 30 days</option
+              >
+              <option value="90">Last 90 days</option>
+              <option value="custom">Custom range</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Data Refresh Rate</label
+            >
+            <select
+              id="refresh-rate"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            >
+              <option value="15">Every 15 minutes</option>
+              <option value="30">Every 30 minutes</option>
+              <option
+                value="60"
+                selected={reportingPreferences.refreshRate === "60"}
+                >Every hour</option
+              >
+              <option value="daily">Once daily</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Scheduled Reports</label
+            >
+            <select
+              id="scheduled-reports"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            >
+              <option value="none">None</option>
+              <option value="daily">Daily</option>
+              <option
+                value="weekly"
+                selected={reportingPreferences.scheduledReports === "weekly"}
+                >Weekly</option
+              >
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4">Preferences</h2>
+
+    <div class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-md font-medium">Email Notifications</h3>
+          <p class="text-sm text-gray-500">
+            Receive email updates about campaign performance
+          </p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="email-notifications-toggle"
+            class="sr-only peer"
+            checked={notificationPreferences.emailNotifications}
+          />
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroondark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroondark"
+          >
+          </div>
+        </label>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-md font-medium">AI Suggestions</h3>
+          <p class="text-sm text-gray-500">
+            Show AI-powered marketing suggestions
+          </p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="ai-suggestions-toggle"
+            class="sr-only peer"
+            checked={notificationPreferences.aiSuggestions}
+          />
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroondark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroondark"
+          >
+          </div>
+        </label>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-md font-medium">Performance Alerts</h3>
+          <p class="text-sm text-gray-500">
+            Get notified when campaigns exceed or fall below targets
+          </p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="performance-alerts-toggle"
+            class="sr-only peer"
+            checked={notificationPreferences.performanceAlerts}
+          />
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroondark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroondark"
+          >
+          </div>
+        </label>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-md font-medium">Real-time Collaboration</h3>
+          <p class="text-sm text-gray-500">
+            Allow team members to see your activity in real-time
+          </p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="collaboration-toggle"
+            class="sr-only peer"
+            checked={notificationPreferences.realtimeCollaboration}
+          />
+          <div
+            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroondark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroondark"
+          >
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <h2 class="text-lg font-semibold mb-4">Security & Privacy</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-md font-medium mb-2">Password Management</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Current Password</label
+            >
+            <input
+              id="current-password"
+              type="password"
+              value="••••••••"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >New Password</label
+            >
+            <input
+              id="new-password"
+              type="password"
+              placeholder="Enter new password"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Confirm New Password</label
+            >
+            <input
+              id="confirm-password"
+              type="password"
+              placeholder="Confirm new password"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+            />
+          </div>
+
+          <button
+            id="change-password-btn"
+            class="bg-gray-100 text-gray-800 px-4 py-2 rounded hover:bg-gray-200 transition-colors"
+          >
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-md font-medium mb-2">Two-Factor Authentication</h3>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm font-medium text-gray-700">Enable 2FA</p>
+              <p class="text-xs text-gray-500">
+                Add an extra layer of security to your account
+              </p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input
+                type="checkbox"
+                id="twofa-toggle"
+                value=""
+                class="sr-only peer"
+              />
+              <div
+                class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-maroondark rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-maroondark"
+              >
+              </div>
+            </label>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-700 mb-1">
+              Verification Method
+            </p>
+            <select
+              id="verification-method"
+              class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-maroondark focus:border-transparent"
+              disabled
+            >
+              <option value="app">Authenticator App</option>
+              <option value="sms">SMS</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-700 mb-1">Data Privacy</p>
+            <div class="flex items-center space-x-2">
+              <input type="checkbox" id="data-collection" checked />
+              <label for="data-collection" class="text-sm text-gray-700"
+                >Allow anonymous data collection for service improvement</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-end">
+    <button
+      id="save-all-button-bottom"
+      class="bg-maroon2 text-white px-4 py-2 rounded hover:bg-maroondark transition-colors"
+    >
+      Save All Changes
+    </button>
+  </div>
+
+  <!-- Success message toast -->
+  <div
+    id="toast-success"
+    class="fixed bottom-4 right-4 flex items-center p-4 mb-4 text-gray-500 bg-white rounded-lg shadow transform translate-y-10 opacity-0 transition-all duration-300 z-50"
+    role="alert"
+  >
+    <div
+      class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg"
+    >
+      <svg
+        class="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </div>
+    <div class="ml-3 text-sm font-normal toast-message">
+      Changes saved successfully.
+    </div>
+    <button
+      type="button"
+      class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 toast-close-btn"
+      data-dismiss-target="#toast-success"
+      aria-label="Close"
+    >
+      <span class="sr-only">Close</span>
+      <svg
+        class="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Modal for cropping image -->
+  <div
+    id="image-crop-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+  >
+    <div class="bg-white rounded-lg p-6 w-full max-w-md">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold">Crop Profile Image</h3>
+        <button id="close-crop-modal" class="text-gray-500 hover:text-gray-700">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="image-preview-container mb-4 h-64 overflow-hidden">
+        <img id="crop-preview" src="" alt="Preview" class="max-w-full" />
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button
+          id="cancel-crop"
+          class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors"
+        >
+          Cancel
+        </button>
+        <button
+          id="apply-crop"
+          class="px-4 py-2 bg-maroon2 text-white rounded hover:bg-maroondark transition-colors"
+        >
+          Apply
+        </button>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<script>
+  // Profile information update
+  document.addEventListener("DOMContentLoaded", () => {
+    // Image upload functionality
+    const profileImage = document.getElementById("profile-image");
+    const changePhotoOverlay = document.getElementById("change-photo-overlay");
+    const fileInput = document.getElementById("profile-upload");
+    const cropModal = document.getElementById("image-crop-modal");
+    const cropPreview = document.getElementById("crop-preview");
+    const applyCropBtn = document.getElementById("apply-crop");
+    const cancelCropBtn = document.getElementById("cancel-crop");
+    const closeCropModalBtn = document.getElementById("close-crop-modal");
+
+    let selectedFile = null;
+
+    // Open file dialog when clicking on the overlay
+    changePhotoOverlay.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    // Handle file selection
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files && e.target.files[0]) {
+        selectedFile = e.target.files[0];
+
+        // Create a preview URL for the selected image
+        const fileReader = new FileReader();
+        fileReader.onload = (event) => {
+          cropPreview.src = event.target.result;
+          // Show the crop modal
+          cropModal.classList.remove("hidden");
+        };
+        fileReader.readAsDataURL(selectedFile);
+      }
+    });
+
+    // Close crop modal
+    function closeCropModal() {
+      cropModal.classList.add("hidden");
+      fileInput.value = ""; // Reset file input
+    }
+
+    closeCropModalBtn.addEventListener("click", closeCropModal);
+    cancelCropBtn.addEventListener("click", closeCropModal);
+
+    // Apply crop (in a real app this would use a library like Cropper.js)
+    applyCropBtn.addEventListener("click", () => {
+      // For this demo, we'll just use the selected image directly
+      if (selectedFile) {
+        const fileReader = new FileReader();
+        fileReader.onload = (e) => {
+          profileImage.src = e.target.result;
+          closeCropModal();
+          showToast("Profile image updated successfully.");
+        };
+        fileReader.readAsDataURL(selectedFile);
+      }
+    });
+
+    // Handle input changes for profile information
+    const nameInput = document.getElementById("full-name-input");
+    const titleInput = document.getElementById("job-title-input");
+    const nameDisplay = document.getElementById("profile-name-display");
+    const titleDisplay = document.getElementById("profile-title-display");
+
+    nameInput.addEventListener("input", (e) => {
+      nameDisplay.textContent = e.target.value;
+    });
+
+    titleInput.addEventListener("input", (e) => {
+      titleDisplay.textContent = e.target.value;
+    });
+
+    // Handle API connections
+    const connectionButtons = document.querySelectorAll(
+      ".connection-toggle-btn"
+    );
+    connectionButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const connectionItem = e.target.closest(".connection-item");
+        const statusLabel = connectionItem.querySelector(".connection-status");
+
+        if (button.textContent.trim() === "Connect") {
+          statusLabel.textContent = "Connected";
+          statusLabel.classList.remove("bg-gray-100", "text-gray-800");
+          statusLabel.classList.add("bg-green-100", "text-green-800");
+
+          // Add last synced info
+          const syncInfo = document.createElement("span");
+          syncInfo.classList.add("text-xs", "text-gray-500");
+          syncInfo.textContent = "Last synced: just now";
+
+          // Clear any existing sync info
+          const existingSync = connectionItem.querySelector(
+            ".text-xs.text-gray-500"
+          );
+          if (existingSync) {
+            existingSync.remove();
+          }
+
+          // Update button and add sync info
+          button.textContent = "Disconnect";
+          button.parentNode.insertBefore(syncInfo, button);
+
+          showToast(`${connectionItem.dataset.name} connected successfully.`);
+        } else {
+          statusLabel.textContent = "Not Connected";
+          statusLabel.classList.remove("bg-green-100", "text-green-800");
+          statusLabel.classList.add("bg-gray-100", "text-gray-800");
+
+          // Remove last synced info if it exists
+          const syncInfo = connectionItem.querySelector(
+            ".text-xs.text-gray-500"
+          );
+          if (syncInfo) {
+            syncInfo.remove();
+          }
+
+          button.textContent = "Connect";
+          showToast(`${connectionItem.dataset.name} disconnected.`);
+        }
+      });
+    });
+
+    // Handle toggle switches
+    const toggleSwitches = document.querySelectorAll(
+      'input[type="checkbox"].sr-only'
+    );
+    toggleSwitches.forEach((toggle) => {
+      toggle.addEventListener("change", () => {
+        // For 2FA specifically
+        if (toggle.id === "twofa-toggle") {
+          const verificationSelect = document.getElementById(
+            "verification-method"
+          );
+          verificationSelect.disabled = !toggle.checked;
+
+          if (toggle.checked) {
+            // Show a modal with QR code in a real app
+            const confirmSetup = confirm(
+              "Two-factor authentication will be enabled. In a real application, you would scan a QR code with your authenticator app. Would you like to proceed with the setup?"
+            );
+
+            if (!confirmSetup) {
+              toggle.checked = false;
+              verificationSelect.disabled = true;
+              return;
+            }
+
+            showToast("Two-factor authentication enabled.");
+          } else {
+            showToast("Two-factor authentication disabled.");
+          }
+        } else {
+          // Get the closest heading to determine what was toggled
+          const heading = toggle
+            .closest(".flex.items-center.justify-between")
+            .querySelector("h3, p.text-sm.font-medium");
+          const settingName = heading ? heading.textContent : "Setting";
+
+          showToast(
+            `${settingName} ${toggle.checked ? "enabled" : "disabled"}.`
+          );
+        }
+      });
+    });
+
+    // Password validation function
+    // Password validation function
+    function validatePassword(password) {
+      // Should have at least 8 characters, one uppercase, one lowercase and one number
+      const hasEightChars = password.length >= 8;
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+
+      return hasEightChars && hasUpperCase && hasLowerCase && hasNumber;
+    }
+
+    // Handle password change
+    const changePasswordBtn = document.getElementById("change-password-btn");
+    changePasswordBtn.addEventListener("click", () => {
+      const currentPassword = document.getElementById("current-password").value;
+      const newPassword = document.getElementById("new-password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      // Validate all fields are filled
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        showToast("Please fill in all password fields.", "error");
+        return;
+      }
+
+      // Validate passwords match
+      if (newPassword !== confirmPassword) {
+        showToast("New passwords do not match.", "error");
+        return;
+      }
+
+      // Validate password strength
+      if (!validatePassword(newPassword)) {
+        showToast(
+          "Password must be at least 8 characters with uppercase, lowercase, and number.",
+          "error"
+        );
+        return;
+      }
+
+      // In a real app, we would send to server to verify current password
+      // and update with new password
+
+      // Reset fields
+      document.getElementById("current-password").value = "••••••••";
+      document.getElementById("new-password").value = "";
+      document.getElementById("confirm-password").value = "";
+
+      showToast("Password changed successfully.");
+    });
+
+    // Save all changes buttons
+    const saveButtonTop = document.getElementById("save-all-button-top");
+    const saveButtonBottom = document.getElementById("save-all-button-bottom");
+
+    [saveButtonTop, saveButtonBottom].forEach((button) => {
+      button.addEventListener("click", () => {
+        // Validate email format
+        const email = document.getElementById("email-input").value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showToast("Please enter a valid email address.", "error");
+          return;
+        }
+
+        // Validate phone number
+        const phone = document.getElementById("phone-input").value;
+        if (phone && !/^[\d\s\(\)\-\+]+$/.test(phone)) {
+          showToast("Please enter a valid phone number.", "error");
+          return;
+        }
+
+        // Collect all form data (would send to backend in a real app)
+        const formData = {
+          profile: {
+            fullName: document.getElementById("full-name-input").value,
+            jobTitle: document.getElementById("job-title-input").value,
+            email: email,
+            phone: phone,
+            company: document.getElementById("company-input").value,
+            profileImage: document.getElementById("profile-image").src,
+          },
+          reporting: {
+            period: document.getElementById("reporting-period").value,
+            refreshRate: document.getElementById("refresh-rate").value,
+            scheduledReports:
+              document.getElementById("scheduled-reports").value,
+          },
+          preferences: {
+            emailNotifications: document.getElementById(
+              "email-notifications-toggle"
+            ).checked,
+            aiSuggestions: document.getElementById("ai-suggestions-toggle")
+              .checked,
+            performanceAlerts: document.getElementById(
+              "performance-alerts-toggle"
+            ).checked,
+            collaboration: document.getElementById("collaboration-toggle")
+              .checked,
+          },
+          security: {
+            twoFactorEnabled: document.getElementById("twofa-toggle").checked,
+            verificationMethod: document.getElementById("verification-method")
+              .value,
+            dataCollection: document.getElementById("data-collection").checked,
+          },
+        };
+
+        console.log("Form data saved:", formData);
+
+        // In a real app, we would send this data to the server
+        // Simulate API request with delay
+        button.disabled = true;
+        button.textContent = "Saving...";
+
+        setTimeout(() => {
+          button.disabled = false;
+          button.textContent = "Save All Changes";
+          showToast("All changes saved successfully.");
+        }, 1000);
+      });
+    });
+
+    // Enhanced Toast functionality
+    function showToast(message, type = "success") {
+      const toast = document.getElementById("toast-success");
+      const messageElement = toast.querySelector(".toast-message");
+
+      // Set message
+      messageElement.textContent = message;
+
+      // Update toast styles based on message type
+      const iconContainer = toast.querySelector(".inline-flex");
+      if (type === "error") {
+        iconContainer.classList.remove("text-green-500", "bg-green-100");
+        iconContainer.classList.add("text-red-500", "bg-red-100");
+
+        // Replace success icon with error icon
+        iconContainer.innerHTML = `
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+            </svg>
+          `;
+      } else {
+        iconContainer.classList.remove("text-red-500", "bg-red-100");
+        iconContainer.classList.add("text-green-500", "bg-green-100");
+
+        // Restore success icon
+        iconContainer.innerHTML = `
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          `;
+      }
+
+      // Show toast
+      toast.classList.remove("translate-y-10", "opacity-0");
+
+      // Hide after 3 seconds
+      const toastTimeout = setTimeout(() => {
+        toast.classList.add("translate-y-10", "opacity-0");
+      }, 3000);
+
+      // Store the timeout ID to be able to clear it if needed
+      toast.dataset.timeoutId = toastTimeout;
+    }
+
+    // Close toast button
+    const toastCloseBtn = document.querySelector(".toast-close-btn");
+    toastCloseBtn.addEventListener("click", () => {
+      const toast = document.getElementById("toast-success");
+      toast.classList.add("translate-y-10", "opacity-0");
+
+      // Clear any existing timeout
+      if (toast.dataset.timeoutId) {
+        clearTimeout(parseInt(toast.dataset.timeoutId, 10));
+      }
+    });
+
+    // Confirmation before leaving page with unsaved changes
+    let formChanged = false;
+
+    // Track form changes
+    const formInputs = document.querySelectorAll("input, select");
+    formInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        formChanged = true;
+      });
+    });
+
+    // Reset form changed status after saving
+    [saveButtonTop, saveButtonBottom].forEach((button) => {
+      button.addEventListener("click", () => {
+        formChanged = false;
+      });
+    });
+
+    // Confirm before leaving if form has changed
+    window.addEventListener("beforeunload", (e) => {
+      if (formChanged) {
+        e.preventDefault();
+        e.returnValue =
+          "You have unsaved changes. Are you sure you want to leave?";
+        return e.returnValue;
+      }
+    });
+
+    // Additional dynamic features
+
+    // Add tooltip functionality for API connections
+    const apiConnections = document.querySelectorAll(".connection-item");
+    apiConnections.forEach((connection) => {
+      const name = connection.dataset.name;
+      const statusElement = connection.querySelector(".connection-status");
+
+      statusElement.setAttribute(
+        "title",
+        `${statusElement.textContent} to ${name}`
+      );
+
+      // Add hover effect
+      connection.addEventListener("mouseenter", () => {
+        connection.classList.add("bg-gray-50");
+      });
+
+      connection.addEventListener("mouseleave", () => {
+        connection.classList.remove("bg-gray-50");
+      });
+    });
+
+    // Make the scheduled reports select dynamic
+    const refreshRateSelect = document.getElementById("refresh-rate");
+    const scheduledReportsSelect = document.getElementById("scheduled-reports");
+
+    refreshRateSelect.addEventListener("change", () => {
+      // If selecting "once daily" disable weekly reports option
+      if (refreshRateSelect.value === "daily") {
+        // Find the weekly option
+        const weeklyOption = Array.from(scheduledReportsSelect.options).find(
+          (option) => option.value === "weekly"
+        );
+
+        if (weeklyOption) {
+          weeklyOption.disabled = true;
+
+          // If weekly was selected, change to monthly
+          if (scheduledReportsSelect.value === "weekly") {
+            scheduledReportsSelect.value = "monthly";
+          }
+        }
+      } else {
+        // Enable weekly option
+        Array.from(scheduledReportsSelect.options).forEach((option) => {
+          option.disabled = false;
+        });
+      }
+    });
+
+    // Password strength indicator
+    const newPasswordInput = document.getElementById("new-password");
+
+    newPasswordInput.addEventListener("input", () => {
+      const password = newPasswordInput.value;
+
+      if (password) {
+        // Check strength
+        const hasEightChars = password.length >= 8;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasNumber = /\d/.test(password);
+
+        const strength = [
+          hasEightChars,
+          hasUpperCase,
+          hasLowerCase,
+          hasNumber,
+        ].filter(Boolean).length;
+
+        // Update input border color based on strength
+        newPasswordInput.classList.remove(
+          "border-red-300",
+          "border-yellow-300",
+          "border-green-300"
+        );
+
+        if (strength < 2) {
+          newPasswordInput.classList.add("border-red-300");
+        } else if (strength < 4) {
+          newPasswordInput.classList.add("border-yellow-300");
+        } else {
+          newPasswordInput.classList.add("border-green-300");
+        }
+      } else {
+        // Reset styling when empty
+        newPasswordInput.classList.remove(
+          "border-red-300",
+          "border-yellow-300",
+          "border-green-300"
+        );
+      }
+    });
+
+    // Add real-time visual feedback for the data collection checkbox
+    const dataCollectionCheckbox = document.getElementById("data-collection");
+
+    dataCollectionCheckbox.addEventListener("change", () => {
+      const parentDiv = dataCollectionCheckbox.parentElement;
+
+      if (dataCollectionCheckbox.checked) {
+        parentDiv.classList.add("text-green-700");
+        parentDiv.classList.remove("text-gray-500");
+      } else {
+        parentDiv.classList.add("text-gray-500");
+        parentDiv.classList.remove("text-green-700");
+      }
+    });
+  });
+</script>

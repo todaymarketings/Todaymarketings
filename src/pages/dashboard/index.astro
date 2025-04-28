@@ -1,0 +1,290 @@
+---
+// src/pages/dashboard/index.astro
+import DashboardLayout from "../../layouts/DashboardLayout.astro";
+import PerformanceChart from "../../components/PerformanceChart.jsx";
+---
+
+<DashboardLayout title="Marketing AI Dashboard" currentPage="overview">
+  <!-- Stats Cards -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6"
+  >
+    <div
+      class="bg-white rounded-lg p-4 md:p-6 shadow-sm border-l-4"
+      style="border-left-color: #D80032;"
+    >
+      <p class="text-gray-500 text-xs md:text-sm mb-1">Social Engagement</p>
+      <h3 class="text-2xl md:text-3xl font-bold">7,520</h3>
+      <p class="text-green-600 text-xs md:text-sm mt-2">
+        ↑ 12% from last month
+      </p>
+    </div>
+
+    <div
+      class="bg-white rounded-lg p-4 md:p-6 shadow-sm border-l-4"
+      style="border-left-color: #3D0C11;"
+    >
+      <p class="text-gray-500 text-xs md:text-sm mb-1">Email Open Rate</p>
+      <h3 class="text-2xl md:text-3xl font-bold">28.4%</h3>
+      <p class="text-green-600 text-xs md:text-sm mt-2">
+        ↑ 3.2% from last month
+      </p>
+    </div>
+
+    <div
+      class="bg-white rounded-lg p-4 md:p-6 shadow-sm border-l-4"
+      style="border-left-color: #F78CA2;"
+    >
+      <p class="text-gray-500 text-xs md:text-sm mb-1">Chatbot Resolutions</p>
+      <h3 class="text-2xl md:text-3xl font-bold">1,230</h3>
+      <p class="text-green-600 text-xs md:text-sm mt-2">↑ 8% from last month</p>
+    </div>
+
+    <div
+      class="bg-white rounded-lg p-4 md:p-6 shadow-sm border-l-4"
+      style="border-left-color: #F9DEC9;"
+    >
+      <p class="text-gray-500 text-xs md:text-sm mb-1">Market Position</p>
+      <h3 class="text-2xl md:text-3xl font-bold">+5.2%</h3>
+      <p class="text-green-600 text-xs md:text-sm mt-2">Ahead of competitors</p>
+    </div>
+  </div>
+
+  <!-- AI Summary Card -->
+  <div
+    class="rounded-lg p-4 md:p-6 mb-6"
+    style="background-color: #F9DEC9; border: 1px solid #F78CA2;"
+  >
+    <h3 class="text-base md:text-lg font-semibold mb-2" style="color: #3D0C11;">
+      AI Marketing Insight
+    </h3>
+    <p class="text-sm md:text-base text-gray-700">
+      Your social media campaigns are driving exceptional engagement. The latest
+      email campaign achieved 28% higher click-through rates than industry
+      average. Consider allocating more resources to video content which is
+      outperforming other formats by 32%.
+    </p>
+  </div>
+
+  <!-- Service Performance Section -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg md:text-xl font-semibold" style="color: #3D0C11;">
+        Service Performance
+      </h2>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr
+              class="border-b border-gray-200"
+              style="background-color: #F9DEC9;"
+            >
+              <th
+                class="text-left p-3 md:p-4 text-xs md:text-sm font-medium"
+                style="color: #3D0C11;">Service</th
+              >
+              <th
+                class="text-left p-3 md:p-4 text-xs md:text-sm font-medium"
+                style="color: #3D0C11;">Status</th
+              >
+              <th
+                class="text-left p-3 md:p-4 text-xs md:text-sm font-medium"
+                style="color: #3D0C11;">Activity</th
+              >
+              <th
+                class="text-left p-3 md:p-4 text-xs md:text-sm font-medium"
+                style="color: #3D0C11;">Performance</th
+              >
+              <th
+                class="text-left p-3 md:p-4 text-xs md:text-sm font-medium"
+                style="color: #3D0C11;">ROI</th
+              >
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 md:p-4 text-xs md:text-sm font-medium"
+                >Social Media Management</td
+              >
+              <td class="p-3 md:p-4 text-xs md:text-sm">
+                <span class="flex items-center">
+                  <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  <span class="text-green-600">Active</span>
+                </span>
+              </td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">High</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">92%</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">3.8x</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 md:p-4 text-xs md:text-sm font-medium"
+                >Email Marketing</td
+              >
+              <td class="p-3 md:p-4 text-xs md:text-sm">
+                <span class="flex items-center">
+                  <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  <span class="text-green-600">Active</span>
+                </span>
+              </td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">Medium</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">87%</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">4.2x</td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="p-3 md:p-4 text-xs md:text-sm font-medium"
+                >Chatbot Automation</td
+              >
+              <td class="p-3 md:p-4 text-xs md:text-sm">
+                <span class="flex items-center">
+                  <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                  <span class="text-green-600">Active</span>
+                </span>
+              </td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">Very High</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">95%</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">2.7x</td>
+            </tr>
+            <tr>
+              <td class="p-3 md:p-4 text-xs md:text-sm font-medium"
+                >Competitor Analysis</td
+              >
+              <td class="p-3 md:p-4 text-xs md:text-sm">
+                <span class="flex items-center">
+                  <span class="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                  <span class="text-yellow-600">Updating</span>
+                </span>
+              </td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">Medium</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">78%</td>
+              <td class="p-3 md:p-4 text-xs md:text-sm">3.1x</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Performance Chart -->
+  <div class="mb-6">
+    <h2 class="text-lg md:text-xl font-semibold mb-4" style="color: #3D0C11;">
+      Performance Trends
+    </h2>
+    <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+      <div class="flex flex-wrap gap-2 md:gap-4 mb-4">
+        <button
+          class="px-2 md:px-3 py-1 rounded text-white text-xs md:text-sm"
+          style="background-color: #D80032;">Social</button
+        >
+        <button
+          class="px-2 md:px-3 py-1 rounded text-gray-700 bg-gray-100 text-xs md:text-sm"
+          >Email</button
+        >
+        <button
+          class="px-2 md:px-3 py-1 rounded text-gray-700 bg-gray-100 text-xs md:text-sm"
+          >Chatbot</button
+        >
+        <button
+          class="px-2 md:px-3 py-1 rounded text-gray-700 bg-gray-100 text-xs md:text-sm"
+          >Competitor</button
+        >
+      </div>
+      <div class="mb-4 h-64 md:h-80">
+        <PerformanceChart client:load />
+      </div>
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs md:text-sm text-gray-500"
+      >
+        <span>Last 30 Days</span>
+        <div class="flex gap-4 mt-2 sm:mt-0">
+          <button class="text-xs md:text-sm" style="color: #D80032;"
+            >Daily</button
+          >
+          <button class="text-xs md:text-sm text-gray-500">Weekly</button>
+          <button class="text-xs md:text-sm text-gray-500">Monthly</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Competitor Intelligence -->
+  <div class="mb-6">
+    <h2 class="text-lg md:text-xl font-semibold mb-4" style="color: #3D0C11;">
+      Competitor Intelligence
+    </h2>
+    <div class="bg-white rounded-lg shadow-sm p-4 md:p-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+        <div class="border border-gray-200 rounded p-3 md:p-4">
+          <h3 class="text-sm md:text-base font-medium mb-2">Market Position</h3>
+          <div
+            class="h-3 md:h-4 rounded mb-2"
+            style="background-color: #F9DEC9; width: 85%;"
+          >
+          </div>
+          <p class="text-xs md:text-sm text-gray-500">
+            You are outperforming 85% of competitors
+          </p>
+        </div>
+        <div class="border border-gray-200 rounded p-3 md:p-4">
+          <h3 class="text-sm md:text-base font-medium mb-2">
+            Content Engagement
+          </h3>
+          <div
+            class="h-3 md:h-4 rounded mb-2"
+            style="background-color: #F78CA2; width: 72%;"
+          >
+          </div>
+          <p class="text-xs md:text-sm text-gray-500">
+            Your content engagement is 72% higher
+          </p>
+        </div>
+        <div class="border border-gray-200 rounded p-3 md:p-4">
+          <h3 class="text-sm md:text-base font-medium mb-2">Response Time</h3>
+          <div
+            class="h-3 md:h-4 rounded mb-2"
+            style="background-color: #D80032; width: 92%;"
+          >
+          </div>
+          <p class="text-xs md:text-sm text-gray-500">
+            Your response time is 92% faster
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</DashboardLayout>
+
+<style>
+  button:hover[style*="background-color: #D80032"],
+  button:hover[style*="color: #D80032"] {
+    background-color: #3d0c11 !important;
+    color: white !important;
+  }
+
+  /* Force table to be responsive */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Custom scrollbar for table overflow */
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #f78ca2;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 640px) {
+    table {
+      min-width: 500px;
+    }
+  }
+</style>

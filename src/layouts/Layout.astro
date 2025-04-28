@@ -1,0 +1,382 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
+import favicon from "../assets/favicon.png";
+import ChatwootWidget from "../components/ChatwootWidget";
+import CookieConsent from "../components/CookieConsent";
+import so1 from "../assets/so1.svg";
+import so2 from "../assets/so2.svg";
+import so3 from "../assets/so3.svg";
+import so4 from "../assets/so4.svg";
+import so5 from "../assets/so5.svg";
+
+// Define the SEO props interface with default values
+const {
+  title = "Default Title",
+  description = "Today Marketings - Your marketing partner for growth and success",
+  canonical,
+  image = "/default-og-image.jpg",
+  keywords = "marketing, digital marketing, today marketings",
+  ogType = "website",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" style={{ scrollbarWidth: "none" }}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | Today Marketings</title>
+    <link rel="icon" type="image/svg+xml" href={favicon.src} />
+    <!-- Primary SEO Tags -->
+    <title>{title} | Today Marketings</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <!-- Font Awesome for social icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <Navbar client:load />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer client:load />
+
+    <!-- Social Media Floating Button -->
+    <div class="social-float-container">
+      <button
+        id="socialToggle"
+        class="social-toggle-btn"
+        aria-label="Toggle social media links"
+      >
+        <span class="share-icon">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z"
+              fill="#FFFFFF"></path>
+            <path
+              d="M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z"
+              fill="#FFFFFF"></path>
+            <path
+              d="M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z"
+              fill="#FFFFFF"></path>
+            <path
+              d="M8.59 13.51L15.42 17.49"
+              stroke="#FFFFFF"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+            <path
+              d="M15.41 6.51L8.59 10.49"
+              stroke="#FFFFFF"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </button>
+
+      <div id="socialIcons" class="social-icons">
+        <a
+          href="https://www.facebook.com/TodayMarketings/"
+          target="_blank"
+          class="social-icon"
+          data-angle="0"
+          aria-label="Facebook"
+        >
+          <img src={so1.src} alt="Facebook" class="social-svg" />
+        </a>
+        <a
+          href="https://x.com/TodayMarketings"
+          target="_blank"
+          class="social-icon"
+          data-angle="22.5"
+          aria-label="Twitter"
+        >
+          <img src={so2.src} alt="Instagram" class="social-svg" />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/today-marketings/"
+          target="_blank"
+          class="social-icon"
+          data-angle="45"
+          aria-label="Linkedin"
+        >
+          <img src={so3.src} alt="YouTube" class="social-svg" />
+        </a>
+        <a
+          href="https://www.youtube.com/@Today_Marketings"
+          target="_blank"
+          class="social-icon"
+          data-angle="67.5"
+          aria-label="Youtube"
+        >
+          <img src={so4.src} alt="Twitter" class="social-svg" />
+        </a>
+        <a
+          href="https://www.quora.com/profile/Today-Marketings"
+          target="_blank"
+          class="social-icon"
+          data-angle="90"
+          aria-label="Quora"
+        >
+          <img src={so5.src} alt="LinkedIn" class="social-svg" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button
+      id="scrollToTop"
+      class="scroll-to-top-btn hidden"
+      aria-label="Scroll to top"
+    >
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 19V5"
+          stroke="#FFFFFF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+        <path
+          d="M5 12L12 5L19 12"
+          stroke="#FFFFFF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <style>
+      .social-float-container {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        z-index: 999;
+      }
+
+      .social-toggle-btn {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background-color: #d80032; /* Red color */
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        transition:
+          transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+          background-color 0.3s ease;
+        z-index: 1000;
+      }
+
+      .social-toggle-btn:hover {
+        background-color: #a90028;
+      }
+
+      .social-toggle-btn.active {
+        transform: rotate(135deg);
+        background-color: #ef4444; /* Red when active */
+      }
+
+      .social-icons {
+        position: absolute;
+        bottom: 1.75rem;
+        left: 1.75rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      .social-icons.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .social-icon {
+        position: absolute;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white; /* Default background */
+        transform: scale(0) translate(0, 0);
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        /* Position all icons initially on top of the main button */
+        bottom: 0.5rem;
+        left: 0.5rem;
+        padding: 0; /* Remove padding */
+        overflow: hidden; /* Ensure SVG stays within bounds */
+      }
+
+      .social-svg {
+        width: 100%; /* Cover the full width */
+        height: 100%; /* Cover the full height */
+        display: block;
+        object-fit: cover; /* Ensure the SVG covers the entire area */
+      }
+
+      .social-icons.active .social-icon {
+        transform: scale(1) translate(var(--translateX), var(--translateY));
+        opacity: 1;
+      }
+
+      .social-icon:hover {
+        transform: scale(1.15) translate(var(--translateX), var(--translateY));
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Scroll to Top Button Styles */
+      .scroll-to-top-btn {
+        position: fixed;
+        bottom: 150px; /* 200px from bottom as requested */
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: #d80032; /* Red color */
+        color: white;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        z-index: 999;
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+
+      .scroll-to-top-btn:hover {
+        background-color: #d80032;
+        transform: translateY(-5px);
+      }
+
+      .scroll-to-top-btn.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    </style>
+
+    <script>
+      // Wait for the DOM to be fully loaded
+      document.addEventListener("DOMContentLoaded", () => {
+        const socialToggle = document.getElementById("socialToggle");
+        const socialIcons = document.getElementById("socialIcons");
+        const icons = document.querySelectorAll(".social-icon");
+        const scrollToTopBtn = document.getElementById("scrollToTop");
+        let scrollTimeout;
+
+        // Set up the quarter-circle distribution with increased radius
+        const radius = 120; // Increased radius for more spacing between icons
+
+        // Add a slight offset to each icon to prevent overlap
+        icons.forEach((icon) => {
+          const angle =
+            parseInt(icon.getAttribute("data-angle")) * (Math.PI / 180);
+
+          // Calculate x and y coordinates on a quarter-circle (0 to 90 degrees)
+          const x = Math.cos(angle) * radius;
+          const y = -Math.sin(angle) * radius; // Negative because y increases downward in CSS
+
+          // Set CSS variables for the position
+          icon.style.setProperty("--translateX", `${x}px`);
+          icon.style.setProperty("--translateY", `${y}px`);
+
+          // Add staggered delay for smoother animation
+          const delay =
+            (parseFloat(icon.getAttribute("data-angle")) / 90) * 0.2;
+          icon.style.transitionDelay = `${delay}s`;
+        });
+
+        socialToggle.addEventListener("click", () => {
+          socialToggle.classList.toggle("active");
+          socialIcons.classList.toggle("active");
+        });
+
+        // Close social icons when clicking outside
+        document.addEventListener("click", (event) => {
+          const isClickInside =
+            socialToggle.contains(event.target) ||
+            socialIcons.contains(event.target);
+
+          if (!isClickInside && socialIcons.classList.contains("active")) {
+            socialToggle.classList.remove("active");
+            socialIcons.classList.remove("active");
+
+            // Reset transition delay when closing
+            icons.forEach((icon) => {
+              icon.style.transitionDelay = "0s";
+            });
+          }
+        });
+
+        // Scroll to top functionality
+        scrollToTopBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        // Show button when scrolling down and hide after 2 seconds of inactivity
+        function handleScroll() {
+          if (window.scrollY > 300) {
+            scrollToTopBtn.classList.remove("hidden");
+
+            // Clear any existing timeout
+            clearTimeout(scrollTimeout);
+
+            // Set timeout to hide button after 2 seconds of inactivity
+            scrollTimeout = setTimeout(() => {
+              scrollToTopBtn.classList.add("hidden");
+            }, 2000);
+          } else {
+            scrollToTopBtn.classList.add("hidden");
+          }
+        }
+
+        // Initial check in case page is loaded scrolled down
+        handleScroll();
+
+        // Add scroll event listener
+        window.addEventListener("scroll", handleScroll);
+      });
+    </script>
+    <ChatwootWidget client:load />
+
+    <CookieConsent client:load />
+  </body>
+</html>

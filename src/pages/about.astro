@@ -1,0 +1,622 @@
+---
+import Layout from "../layouts/Layout.astro";
+import mission from "../assets/mission.png";
+import vision from "../assets/vision.png";
+
+import ab1 from "../assets/ab1.svg";
+import ab2 from "../assets/ab2.svg";
+import ab3 from "../assets/ab3.svg";
+import ab4 from "../assets/ab4.svg";
+// SEO metadata for the homepage
+const seoData = {
+  title: "ABout Us",
+  description:
+    "Discover the story behind Today Marketings from our bold beginnings in 2022 to becoming a global AI marketing leader. Learn about our mission to make marketing smarter, our vision for the future, and how we help businesses grow with innovative, data-driven solutions.",
+  keywords:
+    "AI marketing company, digital marketing agency, marketing automation tools, marketing innovation, global AI marketing, startup story, company mission, business growth solutions, AI-driven campaigns.",
+  canonical: "https://todaymarketings.com/",
+  image: "../assets/favicon.png",
+  ogType: "website",
+};
+---
+
+<Layout title="About Us">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-16">
+    <!-- Mission and Vision Section with Central Triangles -->
+    <div class="mt-24 mb-24">
+      <div
+        class="flex flex-col md:flex-row items-stretch justify-between relative"
+      >
+        <!-- Left Box (Mission) - Added higher z-index -->
+        <div
+          class="w-full md:w-5/12 bg-white p-8 rounded-xl shadow-lg mb-16 md:mb-0 flex flex-col justify-center relative hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group z-10"
+        >
+          <!-- Red border accent on the right -->
+          <div
+            class="hidden md:block absolute right-0 top-0 bottom-0 w-4 bg-[#D80032] rounded-r-xl group-hover:w-6 transition-all duration-300"
+          >
+          </div>
+
+          <h2
+            class="text-3xl font-bold text-gray-900 mb-4 group-hover:text-[#D80032] transition-colors duration-300 bg-clip-text text-transparent"
+            style={{
+              backgroundImage: "linear-gradient(to left, #3D0C11, #D80032)",
+            }}
+          >
+            Our Mission
+          </h2>
+          <p
+            class="text-lg text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
+          >
+            At Today Marketings, our goal is to qualify businesses with
+            innovative, data-driven digital marketing strategies that drive real
+            growth and lasting impact. We are committed to delivering measurable
+            results, fostering strong client relationships, and helping brands
+            thrive in an ever-evolving digital landscape.. test word
+          </p>
+        </div>
+
+        <!-- Center Triangles with Images - Lower z-index -->
+        <div
+          class="w-full md:w-2/12 flex justify-center items-center mb-16 md:mb-0 z-0"
+        >
+          <div class="flex justify-center items-center">
+            <!-- Left triangle (pointing left) with image -->
+            <div
+              class="w-20 h-32 md:w-32 md:h-48 transform transition-transform duration-300 hover:scale-110 relative overflow-hidden"
+            >
+              <div
+                class="w-full h-full bg-[#D80032] relative"
+                style="clip-path: polygon(100% 0, 0 50%, 100% 100%);"
+              >
+                <!-- Image inside left triangle - centered on vertical line -->
+                <div
+                  class="absolute inset-0 flex items-center justify-end overflow-hidden"
+                >
+                  <div class="w-[50px] h-[50px] mr-1 overflow-hidden">
+                    <img
+                      src={mission.src || "/api/placeholder/50/50"}
+                      alt="Innovation"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Smaller gap between triangles -->
+            <div class="w-1 md:w-2"></div>
+
+            <!-- Right triangle (pointing right) with image -->
+            <div
+              class="w-20 h-32 md:w-32 md:h-48 transform transition-transform duration-300 hover:scale-110 relative overflow-hidden"
+            >
+              <div
+                class="w-full h-full bg-[#D80032] relative"
+                style="clip-path: polygon(0 0, 100% 50%, 0 100%);"
+              >
+                <!-- Image inside right triangle - centered on vertical line -->
+                <div
+                  class="absolute inset-0 flex items-center justify-start overflow-hidden"
+                >
+                  <div class="w-[50px] h-[50px] ml-1 overflow-hidden">
+                    <img
+                      src={vision.src || "/api/placeholder/50/50"}
+                      alt="Growth"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Box (Vision) - Added higher z-index -->
+        <div
+          class="w-full md:w-5/12 bg-white p-8 rounded-xl shadow-lg flex flex-col justify-center relative hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group z-10"
+        >
+          <!-- Red border accent on the left -->
+          <div
+            class="hidden md:block absolute left-0 top-0 bottom-0 w-4 bg-[#D80032] rounded-l-xl group-hover:w-6 transition-all duration-300"
+          >
+          </div>
+
+          <h2
+            class="text-3xl font-bold text-gray-900 mb-4 group-hover:text-[#D80032] transition-colors duration-300 bg-clip-text text-transparent"
+            style={{
+              backgroundImage: "linear-gradient(to left, #3D0C11, #D80032)",
+            }}
+          >
+            Our Vision
+          </h2>
+          <p
+            class="text-lg text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
+          >
+            Our vision is to become a global leader in digital marketing
+            solutions by setting new standards in creativity, performance, and
+            client satisfaction. We aim to shape the future of marketing by
+            combining technology, strategy, and passion to create campaigns that
+            not only reach but resonate with audiences around the world.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Story Section with Image Slider - Improved Responsiveness -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2
+          class="text-3xl font-bold text-gray-900 bg-clip-text text-transparent"
+          style={{
+            backgroundImage: "linear-gradient(to left, #3D0C11, #D80032)",
+          }}
+        >
+          Our Story
+        </h2>
+        <p class="mt-4 text-lg text-gray-700">
+          Back in 2022, we started with one big idea: what if marketing could be
+          smarter, easier, and more effective for everyone? That’s how Today
+          Marketing was born.
+        </p>
+        <p class="mt-4 text-lg text-gray-700">
+          We were just a small group of curious minds passionate about
+          technology and helping businesses grow. Fast forward to today, and
+          we’ve grown into a global team serving thousands of clients across
+          different industries.
+        </p>
+        <p class="mt-4 text-lg text-gray-700">
+          What drives us? Simple. We believe marketing should feel effortless
+          and actually work. That’s why we build AI-powered tools that not only
+          solve real problems but make the whole experience smoother, faster,
+          and a little more exciting for our users.
+        </p>
+      </div>
+
+      <!-- Improved Image Slider Section -->
+      <div class="bg-gray-100 p-4 sm:p-6 rounded-lg">
+        <!-- Auto-changing image slider with improved height and responsiveness -->
+        <div class="image-slider relative w-full">
+          <!-- Images container -->
+          <div class="image-slider-container w-full relative">
+            <!-- Timeline container - Improved scrolling and visibility with hidden scrollbar -->
+            <div
+              class="timeline-container flex items-center justify-start w-full mb-6 overflow-x-auto pb-4 gap-2 md:gap-0 hide-scrollbar"
+            >
+              <!-- Timeline item 1 -->
+              <div class="timeline-item-wrapper flex-shrink-0">
+                <div
+                  class="image-button active cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#D80032] rounded-lg overflow-hidden"
+                  data-index="0"
+                >
+                  <img
+                    src={ab1.src || "/api/placeholder/100/100"}
+                    alt="Company History"
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Arrow container 0 to 1 -->
+              <div
+                class="timeline-arrow arrow-0-1 flex items-center justify-center flex-shrink-0 mx-1 sm:mx-2 md:mx-3"
+              >
+                <div class="arrow-line"></div>
+                <div class="arrow-head"></div>
+              </div>
+
+              <!-- Timeline item 2 -->
+              <div class="timeline-item-wrapper flex-shrink-0">
+                <div
+                  class="image-button cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#D80032] rounded-lg overflow-hidden"
+                  data-index="1"
+                >
+                  <img
+                    src={ab2.src || "/api/placeholder/100/100"}
+                    alt="Growth Phase"
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Arrow container 1 to 2 -->
+              <div
+                class="timeline-arrow arrow-1-2 flex items-center justify-center flex-shrink-0 mx-1 sm:mx-2 md:mx-3"
+              >
+                <div class="arrow-line"></div>
+                <div class="arrow-head"></div>
+              </div>
+
+              <!-- Timeline item 3 -->
+              <div class="timeline-item-wrapper flex-shrink-0">
+                <div
+                  class="image-button cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#D80032] rounded-lg overflow-hidden"
+                  data-index="2"
+                >
+                  <img
+                    src={ab3.src || "/api/placeholder/100/100"}
+                    alt="Innovation Hub"
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover"
+                  />
+                </div>
+              </div>
+
+              <!-- Arrow container 2 to 3 -->
+              <div
+                class="timeline-arrow arrow-2-3 flex items-center justify-center flex-shrink-0 mx-1 sm:mx-2 md:mx-3"
+              >
+                <div class="arrow-line"></div>
+                <div class="arrow-head"></div>
+              </div>
+
+              <!-- Timeline item 4 -->
+              <div class="timeline-item-wrapper flex-shrink-0">
+                <div
+                  class="image-button cursor-pointer transition-all duration-300 border-4 border-transparent hover:border-[#D80032] rounded-lg overflow-hidden"
+                  data-index="3"
+                >
+                  <img
+                    src={ab4.src || "/api/placeholder/100/100"}
+                    alt="Global Presence"
+                    class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Content slides container with improved spacing -->
+            <div class="content-slides min-h-[150px] sm:min-h-[120px]">
+              <div class="content-slide active bg-white p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="font-bold text-lg text-gray-900">Our Beginning</h3>
+                  <span class="text-[#D80032] font-semibold">2022</span>
+                </div>
+                <p class="text-gray-700">
+                  Started in 2022 with a bold idea to make marketing smarter,
+                  easier, and more human.
+                </p>
+              </div>
+
+              <div class="content-slide hidden bg-white p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="font-bold text-lg text-gray-900">Growth Phase</h3>
+                  <span class="text-[#D80032] font-semibold">2023</span>
+                </div>
+                <p class="text-gray-700">
+                  From a passionate team to a thriving company, we’ve scaled
+                  through trust, innovation, and results.
+                </p>
+              </div>
+
+              <div class="content-slide hidden bg-white p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="font-bold text-lg text-gray-900">
+                    Innovation Hub
+                  </h3>
+                  <span class="text-[#D80032] font-semibold">2024</span>
+                </div>
+                <p class="text-gray-700">
+                  We create AI-powered marketing tools that simplify complexity
+                  and spark real business growth every day.
+                </p>
+              </div>
+
+              <div class="content-slide hidden bg-white p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                  <h3 class="font-bold text-lg text-gray-900">
+                    Global Presence
+                  </h3>
+                  <span class="text-[#D80032] font-semibold">2025</span>
+                </div>
+                <p class="text-gray-700">
+                  Today, we proudly serve clients worldwide, helping brands
+                  connect, grow, and lead in digital spaces.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Image slider functionality
+  document.addEventListener("DOMContentLoaded", function () {
+    const imageButtons = document.querySelectorAll(".image-button");
+    const contentSlides = document.querySelectorAll(".content-slide");
+    const timelineArrows = document.querySelectorAll(".timeline-arrow");
+    let currentSlide = 0;
+    const slideCount = contentSlides.length;
+
+    // Initialize - show the first arrow
+    if (slideCount > 1) {
+      document.querySelector(".arrow-0-1").classList.add("active-arrow");
+    }
+
+    // Function to handle arrows
+    function updateArrows(currentIndex, nextIndex) {
+      // Reset all arrows
+      timelineArrows.forEach((arrow) => {
+        arrow.classList.remove("active-arrow", "reverse-arrow", "next-arrow");
+      });
+
+      // Determine which arrow to activate
+      if (nextIndex > currentIndex) {
+        // Moving forward
+        const arrowClass = `.arrow-${currentIndex}-${nextIndex}`;
+        const arrow = document.querySelector(arrowClass);
+        if (arrow) arrow.classList.add("active-arrow");
+      } else if (nextIndex < currentIndex) {
+        // Moving backward (activate the previous arrow)
+        const arrowClass = `.arrow-${nextIndex}-${currentIndex}`;
+        const arrow = document.querySelector(arrowClass);
+        if (arrow) arrow.classList.add("reverse-arrow", "active-arrow");
+      }
+
+      // Next arrow (for continuous movement)
+      if (nextIndex < slideCount - 1) {
+        const nextArrowClass = `.arrow-${nextIndex}-${nextIndex + 1}`;
+        const nextArrow = document.querySelector(nextArrowClass);
+        if (nextArrow) nextArrow.classList.add("next-arrow");
+      }
+    }
+
+    // Function to change slide
+    function changeSlide(index) {
+      // Handle arrow animations
+      updateArrows(currentSlide, index);
+
+      // Update active image button
+      imageButtons.forEach((button) => {
+        button.classList.remove("active");
+        button.classList.remove("border-[#D80032]");
+        button.classList.add("border-transparent");
+      });
+      imageButtons[index].classList.add("active", "border-[#D80032]");
+
+      // Update content slides with animation
+      contentSlides.forEach((slide) => {
+        slide.classList.add("hidden");
+        slide.classList.remove("active");
+      });
+      setTimeout(() => {
+        contentSlides[index].classList.remove("hidden");
+        contentSlides[index].classList.add("active");
+      }, 50);
+
+      // Update current slide index
+      currentSlide = index;
+
+      // Ensure the active image is in view
+      imageButtons[index].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+
+    // Auto-change slides every 3 seconds
+    let slideInterval = setInterval(() => {
+      let nextSlide = (currentSlide + 1) % slideCount;
+      changeSlide(nextSlide);
+    }, 3000);
+
+    // Add click event listeners to image buttons
+    imageButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        // Clear the auto-slide interval
+        clearInterval(slideInterval);
+
+        // Change to the clicked slide
+        const slideIndex = parseInt(this.getAttribute("data-index"));
+        changeSlide(slideIndex);
+
+        // Restart auto-slide
+        slideInterval = setInterval(() => {
+          let nextSlide = (currentSlide + 1) % slideCount;
+          changeSlide(nextSlide);
+        }, 3000);
+      });
+    });
+
+    // Handle responsiveness
+    function handleResize() {
+      // Check if we need to scroll to the active image in smaller viewports
+      if (window.innerWidth < 768 && currentSlide > 0) {
+        imageButtons[currentSlide].scrollIntoView({
+          behavior: "auto",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+
+    // Listen for window resize events
+    window.addEventListener("resize", handleResize);
+
+    // Initial call to ensure proper layout
+    handleResize();
+  });
+</script>
+
+<style>
+  /* Add some custom animation effects that might not be possible with just Tailwind classes */
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  /* Set minimum height for the image slider to avoid layout shifts */
+  .image-slider {
+    min-height: 240px;
+  }
+
+  /* Timeline container styling - improved for mobile scrolling with hidden scrollbar */
+  .timeline-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    position: relative;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  /* Active image styling - increased prominence */
+  .image-button.active {
+    transform: scale(1.1);
+    border-color: #d80032;
+    box-shadow: 0 0 15px rgba(216, 0, 50, 0.3);
+    z-index: 10;
+    position: relative;
+  }
+
+  /* Content slide transitions */
+  .content-slide {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(10px);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .content-slide.active {
+    animation: fadeIn 0.5s ease-in-out forwards;
+    position: relative;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Timeline Arrow Styling - improved visibility */
+  .timeline-arrow {
+    width: 40px;
+    height: 20px;
+    position: relative;
+    opacity: 0.3;
+    transition: all 0.5s ease;
+  }
+
+  @media (max-width: 640px) {
+    .timeline-arrow {
+      width: 30px;
+    }
+  }
+
+  .timeline-arrow.active-arrow {
+    opacity: 1;
+  }
+
+  .arrow-line {
+    height: 2px;
+    background-color: #d80032;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 8px;
+    transform: translateY(-50%);
+    transform-origin: left;
+    transition: all 0.5s ease;
+  }
+
+  .active-arrow .arrow-line {
+    animation: growLine 1s forwards;
+  }
+
+  .arrow-head {
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid #d80032;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .reverse-arrow .arrow-head {
+    left: 0;
+    right: auto;
+    border-left: none;
+    border-right: 8px solid #d80032;
+  }
+
+  .reverse-arrow .arrow-line {
+    left: 8px;
+    right: 0;
+    transform-origin: right;
+  }
+
+  @keyframes growLine {
+    0% {
+      transform: translateY(-50%) scaleX(0);
+    }
+    100% {
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  /* Next arrow styling */
+  .next-arrow {
+    opacity: 0.5;
+  }
+
+  /* Content slides container positioning */
+  .content-slides {
+    position: relative;
+  }
+
+  /* Media queries for better responsiveness */
+  @media (max-width: 640px) {
+    .image-button img {
+      width: 60px;
+      height: 60px;
+    }
+
+    .content-slide {
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .image-button img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .image-button.active {
+      transform: scale(1.15);
+    }
+
+    .timeline-container {
+      padding-bottom: 12px;
+    }
+  }
+</style>
